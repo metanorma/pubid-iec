@@ -1,0 +1,12 @@
+= IEC publication identifiers ("IEC PubID")
+
+== Purpose
+
+This gem implements a mechanism to parse and utilize IEC publication
+identifiers.
+
+== Use cases to support
+
+. generate updated PubID
+. generate language specific PubID
+. generate dated vs undated PubIDs
