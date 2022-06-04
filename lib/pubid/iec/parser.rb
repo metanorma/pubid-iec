@@ -53,7 +53,7 @@ module Pubid::Iec
       (type | stage.as(:stage)).maybe >>
         # for ISO/IEC WD TS 25025
         space? >> ((stage.as(:stage) | type) >> space).maybe >>
-        digits.as(:number) >>
+        (digits | str("SYMBOL")).as(:number) >>
         # for identifiers like ISO 5537/IDF 26
         (str("|") >> (str("IDF") >> space >> digits).as(:joint_document)).maybe >>
         part.maybe >>
