@@ -12,14 +12,6 @@ module Pubid::Iec
       ).as(:type)
     end
 
-    rule(:stage) do
-      # other stages
-      str("NP") | str("WD") | str("CD") | str("DIS") | str("FDIS") | str("PRF") |
-        str("IS") | str("AWI") | str("PWI") |
-        # AMD and COR stages
-        str("FPD") | str("pD") | str("PD") | str("FD") | str("D")
-    end
-
     rule(:part) do
       (str("-") | str("/")) >> space? >>
         (str("Amd") | str("Cor")).absent? >> (match['[\dA-Z]'] | str("-")).repeat(1).as(:part)
@@ -32,7 +24,6 @@ module Pubid::Iec
     end
 
     rule(:amendment) do
-      (str("/") >> stage.as(:amendment_stage)).maybe >>
         (str("/") | str("+") | space).maybe >>
         str("AMD").as(:amendment) >>
         digits.as(:amendment_version) >>
@@ -40,7 +31,6 @@ module Pubid::Iec
     end
 
     rule(:corrigendum) do
-      (str("/") >> stage.as(:corrigendum_stage)).maybe >>
         (str("/") | space).maybe >>
         (str("Cor") | str("COR")).as(:corrigendum) >>
         digits.as(:corrigendum_version) >>
@@ -48,12 +38,8 @@ module Pubid::Iec
     end
 
     rule(:std_document_body) do
-      (type | stage.as(:stage)).maybe >>
-        # for ISO/IEC WD TS 25025
-        space? >> ((stage.as(:stage) | type) >> space).maybe >>
+      (type >> space).maybe >>
         (digits | str("SYMBOL")).as(:number) >>
-        # for identifiers like ISO 5537/IDF 26
-        (str("|") >> (str("IDF") >> space >> digits).as(:joint_document)).maybe >>
         part.maybe >>
         (space? >> str(":") >> year).maybe >>
         ((amendment >> corrigendum.maybe) | corrigendum).repeat >>
