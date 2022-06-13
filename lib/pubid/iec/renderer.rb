@@ -1,11 +1,7 @@
 module Pubid::Iec
   class Renderer < Pubid::Core::Renderer::Base
     def render_identifier(params)
-      "#{super}%{redline}%{vap}%{database}" % params
-    end
-
-    def render_redline(redline, _opts, _params)
-      " #{redline}"
+      "#{super}%{vap}%{database}" % params
     end
 
     def render_type(type, _opts, _params)
