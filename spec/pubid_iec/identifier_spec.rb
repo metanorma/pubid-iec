@@ -26,6 +26,12 @@ RSpec.describe Pubid::Iec::Identifier do
 
       it_behaves_like "parse identifiers from file"
     end
+
+    context "parses identifiers from tr-pubid.txt" do
+      let(:examples_file) { "tr-pubid.txt" }
+
+      it_behaves_like "parse identifiers from file"
+    end
   end
 
   context "IEC 60050-351:2013/AMD1:2016" do
