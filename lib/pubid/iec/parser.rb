@@ -24,17 +24,17 @@ module Pubid::Iec
     end
 
     rule(:amendment) do
-        (str("/") | str("+") | space).maybe >>
-        str("AMD").as(:amendment) >>
-        digits.as(:amendment_version) >>
-        (str(":") >> digits.as(:amendment_number)).maybe
+      ((str("/") | str("+") | space).maybe >>
+        str("AMD") >>
+        digits.as(:version) >>
+        (str(":") >> digits.as(:number)).maybe).as(:amendments)
     end
 
     rule(:corrigendum) do
-        (str("/") | space).maybe >>
-        (str("Cor") | str("COR")).as(:corrigendum) >>
-        digits.as(:corrigendum_version) >>
-        (str(":") >> digits.as(:corrigendum_number)).maybe
+      ((str("/") | space).maybe >>
+        str("COR") >>
+        digits.as(:version) >>
+        (str(":") >> digits.as(:number)).maybe).as(:corrigendums)
     end
 
     rule(:std_document_body) do
