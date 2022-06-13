@@ -46,12 +46,8 @@ module Pubid::Iec
         edition.maybe
     end
 
-    rule(:redline) do
-      space >> str("RLV").as(:redline)
-    end
-
     rule(:vap) do
-      space >> (str("CSV") | str("SER")).as(:vap)
+      space >> (str("CSV") | str("SER") | str("RLV")).as(:vap)
     end
 
     rule(:database) do
@@ -60,7 +56,7 @@ module Pubid::Iec
 
     rule(:identifier) do
         originator >> (space | str("/")) >>
-        std_document_body >> redline.maybe >>
+        std_document_body >>
         vap.maybe >> database.maybe
     end
 
