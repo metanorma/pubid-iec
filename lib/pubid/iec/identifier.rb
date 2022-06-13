@@ -17,6 +17,14 @@ module Pubid::Iec
       def get_renderer_class
         Renderer
       end
+
+      def get_transformer_class
+        Transformer
+      end
+    end
+
+    def database
+      @database || false
     end
   end
 end

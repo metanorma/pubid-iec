@@ -51,4 +51,18 @@ RSpec.describe Pubid::Iec::Identifier do
 
     it { expect(subject.to_s).to eq(original) }
   end
+
+  context "database identifier" do
+    context "when have DB" do
+      let(:original) { "IEC 60061:2022 DB" }
+
+      it { expect(subject.database).to eq(true) }
+    end
+
+    context "when no DB" do
+      let(:original) { "IEC 60061:2022" }
+
+      it { expect(subject.database).to eq(false) }
+    end
+  end
 end

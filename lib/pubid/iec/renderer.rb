@@ -17,7 +17,7 @@ module Pubid::Iec
     end
 
     def render_database(database, _opts, _params)
-      " #{database}"
+      " DB" if database
     end
 
     def supplement_prefix(params)
