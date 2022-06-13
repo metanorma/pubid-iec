@@ -3,12 +3,12 @@ require "pubid-core"
 module Pubid::Iec
   class Parser < Pubid::Core::Parser
     rule(:organization) do
-      str("IEC") | str("ISO") | str("IEEE") | str("CISPR")
+      str("IECQ") | str("IEC") | str("ISO") | str("IEEE") | str("CISPR")
     end
 
     rule(:type) do
       (str("IS") | str("TS") | str("TR") | str("PAS") | str("SRD") |
-        str("TEC") | str("STTR") | str("WP") | str("Guide") | str("GUIDE")
+        str("TEC") | str("STTR") | str("WP") | str("Guide") | str("GUIDE") | str("OD")
       ).as(:type)
     end
 
