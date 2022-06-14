@@ -93,6 +93,12 @@ RSpec.describe Pubid::Iec::Identifier do
     it { expect(subject.to_s).to eq(original) }
   end
 
+  context "IEC CA 01:2020 CSV" do
+    let(:original) { "IEC CA 01:2020 CSV" }
+
+    it { expect(subject.to_s).to eq(original) }
+  end
+
   context "database identifier" do
     context "when have DB" do
       let(:original) { "IEC 60061:2022 DB" }
