@@ -8,7 +8,8 @@ module Pubid::Iec
 
     rule(:type) do
       (str("IS") | str("TS") | str("TR") | str("PAS") | str("SRD") |
-        str("TEC") | str("STTR") | str("WP") | str("Guide") | str("GUIDE") | str("OD")
+        str("TEC") | str("STTR") | str("WP") | str("Guide") | str("GUIDE") |
+        str("OD") | str("CS")
       ).as(:type)
     end
 
@@ -42,9 +43,13 @@ module Pubid::Iec
         (str(":") >> digits.as(:number)).maybe).as(:corrigendums)
     end
 
+    rule(:number) do
+      (digits >> str("A").maybe) | str("SYMBOL")
+    end
+
     rule(:std_document_body) do
       (type >> space).maybe >>
-        (digits | str("SYMBOL")).as(:number) >>
+        number.as(:number) >>
         part.maybe >>
         (space? >> str(":") >> year).maybe >>
         ((amendment >> corrigendum.maybe) | corrigendum).repeat >>
