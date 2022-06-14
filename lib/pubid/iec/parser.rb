@@ -9,7 +9,7 @@ module Pubid::Iec
     rule(:type) do
       (str("IS") | str("TS") | str("TR") | str("PAS") | str("SRD") |
         str("TEC") | str("STTR") | str("WP") | str("Guide") | str("GUIDE") |
-        str("OD") | str("CS")
+        str("OD") | str("CS") | str("CA")
       ).as(:type)
     end
 
