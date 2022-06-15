@@ -1,6 +1,6 @@
 module Pubid::Iec
   class Identifier < Pubid::Core::Identifier
-    attr_accessor :vap, :database
+    attr_accessor :vap, :database, :fragment
     class << self
       def get_amendment_class
         Amendment

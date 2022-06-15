@@ -3,7 +3,7 @@ require "pubid-core"
 module Pubid::Iec
   class Parser < Pubid::Core::Parser
     rule(:organization) do
-      str("IECQ") | str("IEC") | str("ISO") | str("IEEE") | str("CISPR")
+      str("IECQ") | str("IEC") | str("ISO") | str("IEEE") | str("CISPR") | str("PNW")
     end
 
     rule(:type) do
@@ -17,10 +17,11 @@ module Pubid::Iec
         (str("Amd") | str("Cor")).absent? >> (match['[\dA-Z]'] | str("-")).repeat(1).as(:part)
     end
 
-    rule(:version) { digits >> dot >> digits }
+    rule(:version) { digits >> (dot >> digits).maybe }
 
     rule(:edition) do
-      space >> str("Edition ") >> version.as(:edition) >> space >> year_month.as(:edtion_date)
+      space >> (str("Edition ") >> version.as(:edition) >> space >> year_month.as(:edtion_date) |
+        str("ED") >> version.as(:edition))
     end
 
     rule(:amendment) do
@@ -28,6 +29,10 @@ module Pubid::Iec
         str("AMD") >>
         digits.as(:version) >>
         (str(":") >> digits.as(:number)).maybe).as(:amendments)
+    end
+
+    rule(:fragment) do
+      (str("/") >> str("FRAG") >> match('[\dA-Z]').repeat(1).as(:fragment)).maybe
     end
 
     rule(:corrigendum) do
@@ -43,7 +48,7 @@ module Pubid::Iec
         part.maybe >>
         (space? >> str(":") >> year).maybe >>
         ((amendment >> corrigendum.maybe) | corrigendum).repeat >>
-        edition.maybe
+        fragment.maybe
     end
 
     rule(:vap) do
@@ -57,7 +62,8 @@ module Pubid::Iec
     rule(:identifier) do
         originator >> (space | str("/")) >>
         std_document_body >>
-        vap.maybe >> database.maybe
+        vap.maybe >> database.maybe >>
+        edition.maybe
     end
 
     rule(:root) { identifier }
