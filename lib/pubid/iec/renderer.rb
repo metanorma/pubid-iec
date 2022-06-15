@@ -1,7 +1,8 @@
 module Pubid::Iec
   class Renderer < Pubid::Core::Renderer::Base
     def render_identifier(params)
-      "#{super}%{vap}%{database}" % params
+      "%{publisher}%{copublisher}%{type}%{stage} %{number}%{part}%{iteration}"\
+      "%{year}%{amendments}%{corrigendums}%{fragment}%{vap}%{edition}%{language}%{database}" % params
     end
 
     def render_type(type, _opts, _params)
@@ -10,6 +11,10 @@ module Pubid::Iec
 
     def render_vap(vap, _opts, _params)
       " #{vap}"
+    end
+
+    def render_fragment(fragment, _opts, _params)
+      "/FRAG#{fragment}"
     end
 
     def render_database(database, _opts, _params)

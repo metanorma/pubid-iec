@@ -43,6 +43,12 @@ RSpec.describe Pubid::Iec::Identifier do
 
       it_behaves_like "parse identifiers from file"
     end
+
+    context "parses identifiers from tc1-pubid.txt" do
+      let(:examples_file) { "tc1-pubid.txt" }
+
+      it_behaves_like "parse identifiers from file"
+    end
   end
 
   context "IEC 60050-351:2013/AMD1:2016" do
@@ -65,6 +71,18 @@ RSpec.describe Pubid::Iec::Identifier do
 
   context "IEC 62439-1:2010+AMD1:2012+AMD2:2016 CSV" do
     let(:original) { "IEC 62439-1:2010+AMD1:2012+AMD2:2016 CSV" }
+
+    it { expect(subject.to_s).to eq(original) }
+  end
+
+  context "IEC 60050-102:2007/AMD1:2017 ED1" do
+    let(:original) { "IEC 60050-102:2007/AMD1:2017 ED1" }
+
+    it { expect(subject.to_s).to eq(original) }
+  end
+
+  context "IEC 60050-111/AMD1/FRAG1 ED2" do
+    let(:original) { "IEC 60050-111/AMD1/FRAG1 ED2" }
 
     it { expect(subject.to_s).to eq(original) }
   end
