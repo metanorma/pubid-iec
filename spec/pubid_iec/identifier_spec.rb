@@ -1,5 +1,6 @@
 RSpec.describe Pubid::Iec::Identifier do
-  subject { described_class.parse(original) }
+  subject { described_class.parse(original || pubid) }
+  let(:original) { nil }
 
   describe "parse identifiers from examples files" do
     shared_examples "parse identifiers from file" do
@@ -20,6 +21,7 @@ RSpec.describe Pubid::Iec::Identifier do
         end
       end
     end
+
 
     context "parses identifiers from pubid-parsed.txt" do
       let(:examples_file) { "iec-pubid.txt" }
@@ -54,6 +56,18 @@ RSpec.describe Pubid::Iec::Identifier do
       let(:examples_file) { "iecq-pubid.txt" }
 
       it_behaves_like "parse identifiers from file"
+    end
+
+    context "parses identifiers from trf-pubid.txt" do
+      let(:examples_file) { "trf-pubid.txt" }
+
+      it_behaves_like "parse identifiers from file"
+    end
+  end
+
+  shared_examples "converts pubid to pubid" do
+    it "converts pubid to pubid" do
+      expect(subject.to_s).to eq(pubid)
     end
   end
 
@@ -97,6 +111,69 @@ RSpec.describe Pubid::Iec::Identifier do
     let(:original) { "IEC CA 01:2020 CSV" }
 
     it { expect(subject.to_s).to eq(original) }
+  end
+
+  context "IECEE TRF 10079-1A:2020" do
+    let(:original) { "IECEE TRF 10079-1A:2020" }
+
+    it { expect(subject.to_s).to eq(original) }
+  end
+
+  context "IECEx TRF 16852v2A:2017" do
+    let(:original) { "IECEx TRF 16852v2A:2017" }
+    let(:pubid) { "IECEx TRF 16852v2A:2017" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IECEx TRF 60079-0v7B_DS:2018" do
+    let(:pubid) { "IECEx TRF 60079-0v7B_DS:2018" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IECEx TRF 60079-0v7c_ds:2021" do
+    let(:pubid) { "IECEx TRF 60079-0v7c_ds:2021" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IECEx TRF 60079-11v6A2:2012" do
+    let(:pubid) { "IECEx TRF 60079-11v6A2:2012" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IECEE TRF 60335-2-10,54B:2017" do
+    let(:pubid) { "IECEE TRF 60335-2-10,54B:2017" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IECEE TRF 60086-1&2A:2017" do
+    let(:original) { "IECEE TRF 60086-1&2A:2017" }
+    let(:pubid) { "IECEE TRF 60086-1,2A:2017" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IECEE TRF 60335-2-6,9,25B:2020" do
+    let(:pubid) { "IECEE TRF 60335-2-6,9,25B:2020" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IECEE TRF CISPR 15K:2019" do
+    let(:pubid) { "IECEE TRF CISPR 15K:2019" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IECEE TRF cispr 15N:2022" do
+    let(:original) { "IECEE TRF cispr 15N:2022" }
+    let(:pubid) { "IECEE TRF CISPR 15N:2022" }
+
+    it_behaves_like "converts pubid to pubid"
   end
 
   context "database identifier" do
