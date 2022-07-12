@@ -3,13 +3,14 @@ require "pubid-core"
 module Pubid::Iec
   class Parser < Pubid::Core::Parser
     rule(:organization) do
-      str("IECQ") | str("IEC") | str("ISO") | str("IEEE") | str("CISPR") | str("PNW")
+      str("IECEE") | str("IECEx") | str("IECQ") | str("IEC") | str("ISO") |
+        str("IEEE") | str("CISPR") | str("PNW")
     end
 
     rule(:type) do
-      (str("IS") | str("TS") | str("TR") | str("PAS") | str("SRD") |
-        str("TEC") | str("STTR") | str("WP") | str("Guide") | str("GUIDE") |
-        str("OD") | str("CS") | str("CA")
+      (str("TRF") | str("IS") | str("TS") | str("TR") | str("PAS") | str("SRD") |
+        str("TEC") | str("STTR") | str("WP") | str("Guide") | str("GUIDE") | str("OD") |
+        str("CS") | str("CA")
       ).as(:type)
     end
 
@@ -21,8 +22,9 @@ module Pubid::Iec
     rule(:version) { digits >> (dot >> digits).maybe }
 
     rule(:edition) do
-      space >> (str("Edition ") >> version.as(:edition) >> space >> year_month.as(:edtion_date) |
-        str("ED") >> version.as(:edition))
+      (str(" Edition ") >> version.as(:edition) >> space >> year_month.as(:edtion_date) |
+        str(" ED") >> version.as(:edition) |
+        str("v") >> (digits >> (match("[A-Za-z]") >> str("rev").maybe >> digits.maybe).maybe).as(:version))
     end
 
     rule(:amendment) do
@@ -47,10 +49,21 @@ module Pubid::Iec
       (digits >> str("A").maybe) | str("SYMBOL")
     end
 
+    rule(:decision_sheet) do
+      (str("_DS") | str("_ds")).as(:decision_sheet)
+    end
+
+    rule(:conjuction_part) do
+      (str(",") >> digits.as(:conjuction_part)).repeat(1) >> match["A-Z"].maybe.as(:part_version)
+    end
+
     rule(:std_document_body) do
       (type >> space).maybe >>
-        number.as(:number) >>
+        (organization.as(:trf_publisher) >> space).maybe >>
+        ((digits | str("SYMBOL")) >> match("[A-Z]").maybe).as(:number) >>
+        edition.maybe >>
         part.maybe >>
+        conjuction_part.maybe >>
         (space? >> str(":") >> year).maybe >>
         ((amendment >> corrigendum.maybe) | corrigendum).repeat >>
         fragment.maybe
@@ -68,7 +81,9 @@ module Pubid::Iec
         originator >> (space | str("/")) >>
         std_document_body >>
         vap.maybe >> database.maybe >>
-        edition.maybe
+        edition.maybe >>
+        decision_sheet.maybe >>
+        (str(":") >> year).maybe
     end
 
     rule(:root) { identifier }

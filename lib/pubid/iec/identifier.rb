@@ -1,6 +1,8 @@
 module Pubid::Iec
   class Identifier < Pubid::Core::Identifier
-    attr_accessor :vap, :database, :fragment
+
+    attr_accessor :vap, :database, :fragment, :version, :decision_sheet,
+                  :conjuction_part, :part_version, :trf_publisher
     class << self
       def get_amendment_class
         Amendment
