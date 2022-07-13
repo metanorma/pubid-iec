@@ -54,7 +54,8 @@ module Pubid::Iec
     end
 
     rule(:conjuction_part) do
-      (str(",") >> digits.as(:conjuction_part)).repeat(1) >> match["A-Z"].maybe.as(:part_version)
+      (str(",") >> digits.as(:conjuction_part)).repeat(1) >>
+        (match["A-Z"] >> str("_").maybe >> match["IVX"].repeat).maybe.as(:part_version)
     end
 
     rule(:std_document_body) do
