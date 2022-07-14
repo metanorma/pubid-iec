@@ -183,6 +183,12 @@ RSpec.describe Pubid::Iec::Identifier do
     it_behaves_like "converts pubid to pubid"
   end
 
+  context "IECEE TRF 61215E_SE:2021" do
+    let(:pubid) { "IECEE TRF 61215E_SE:2021" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
   context "database identifier" do
     context "when have DB" do
       let(:original) { "IEC 60061:2022 DB" }
