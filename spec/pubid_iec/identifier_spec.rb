@@ -57,12 +57,6 @@ RSpec.describe Pubid::Iec::Identifier do
 
       it_behaves_like "parse identifiers from file"
     end
-
-    context "parses identifiers from trf-pubid.txt" do
-      let(:examples_file) { "trf-pubid.txt" }
-
-      it_behaves_like "parse identifiers from file"
-    end
   end
 
   shared_examples "converts pubid to pubid" do
@@ -179,6 +173,12 @@ RSpec.describe Pubid::Iec::Identifier do
   context "IECEE TRF 60127-2-iBI:2011" do
     let(:original) { "IECEE TRF 60127-2-iBI:2011" }
     let(:pubid) { "IECEE TRF 60127-1,2B_I:2011" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IECEE TRF 60601-1-2J_EMC:2021" do
+    let(:pubid) { "IECEE TRF 60601-1-2J_EMC:2021" }
 
     it_behaves_like "converts pubid to pubid"
   end

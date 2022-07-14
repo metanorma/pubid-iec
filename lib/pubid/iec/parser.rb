@@ -14,6 +14,10 @@ module Pubid::Iec
       ).as(:type)
     end
 
+    rule(:test_type) do
+      str("_") >> (str("EMC") | str("SOF") | str("PS")).as(:test_type)
+    end
+
     rule(:part) do
       (str("-") | str("/")) >> space? >>
         (str("Amd") | str("Cor")).absent? >> (match['[\dA-Z]'] | str("-")).repeat(1).as(:part)
@@ -65,6 +69,7 @@ module Pubid::Iec
         edition.maybe >>
         part.maybe >>
         conjuction_part.maybe >>
+        test_type.maybe >>
         (space? >> str(":") >> year).maybe >>
         ((amendment >> corrigendum.maybe) | corrigendum).repeat >>
         fragment.maybe
