@@ -65,6 +65,10 @@ module Pubid::Iec
       (match["A-Z"].maybe >> (str("_") >> match["IVX"].repeat(1)).maybe).as(:trf_version)
     end
 
+    rule(:trf_series) do
+      str("_SE").as(:trf_series)
+    end
+
     rule(:std_document_body) do
       (type >> space).maybe >>
         (organization.as(:trf_publisher) >> space).maybe >>
@@ -93,6 +97,7 @@ module Pubid::Iec
         vap.maybe >> database.maybe >>
         edition.maybe >>
         decision_sheet.maybe >>
+        trf_series.maybe >>
         (str(":") >> year).maybe
     end
 

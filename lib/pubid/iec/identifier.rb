@@ -3,7 +3,7 @@ module Pubid::Iec
 
     attr_accessor :vap, :database, :fragment, :version, :decision_sheet,
                   :conjuction_part, :part_version, :trf_publisher,
-                  :trf_version, :test_type
+                  :trf_series, :trf_version, :test_type
     class << self
       def get_amendment_class
         Amendment
