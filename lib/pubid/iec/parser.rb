@@ -58,8 +58,11 @@ module Pubid::Iec
     end
 
     rule(:conjuction_part) do
-      (str(",") >> digits.as(:conjuction_part)).repeat(1) >>
-        (match["A-Z"] >> str("_").maybe >> match["IVX"].repeat).maybe.as(:part_version)
+      (str(",") >> digits.as(:conjuction_part)).repeat(1)
+    end
+
+    rule(:trf_version) do
+      (match["A-Z"].maybe >> (str("_") >> match["IVX"].repeat(1)).maybe).as(:trf_version)
     end
 
     rule(:std_document_body) do
@@ -69,6 +72,7 @@ module Pubid::Iec
         edition.maybe >>
         part.maybe >>
         conjuction_part.maybe >>
+        trf_version.maybe >>
         test_type.maybe >>
         (space? >> str(":") >> year).maybe >>
         ((amendment >> corrigendum.maybe) | corrigendum).repeat >>

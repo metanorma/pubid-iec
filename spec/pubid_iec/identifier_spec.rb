@@ -172,7 +172,7 @@ RSpec.describe Pubid::Iec::Identifier do
 
   context "IECEE TRF 60127-2-iBI:2011" do
     let(:original) { "IECEE TRF 60127-2-iBI:2011" }
-    let(:pubid) { "IECEE TRF 60127-1,2B_I:2011" }
+    let(:pubid) { "IECEE TRF 60127-2B_I:2011" }
 
     it_behaves_like "converts pubid to pubid"
   end
