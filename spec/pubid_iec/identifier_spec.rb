@@ -65,65 +65,91 @@ RSpec.describe Pubid::Iec::Identifier do
     end
   end
 
-  context "IEC 60050-351:2013/AMD1:2016" do
-    let(:original) { "IEC 60050-351:2013/AMD1:2016" }
+  shared_examples "converts pubid to urn" do
+    it "converts pubid to urn" do
+      expect(subject.urn.to_s).to eq(urn)
+    end
+  end
 
-    it { expect(subject.to_s).to eq(original) }
+  context "IEC 60050-351:2013/AMD1:2016" do
+    let(:pubid) { "IEC 60050-351:2013/AMD1:2016" }
+    let(:urn) { "urn:iec:std:iec:60050:-351:2013:amd:2016:v1" }
+
+    it_behaves_like "converts pubid to pubid"
+    it_behaves_like "converts pubid to urn"
   end
 
   context "IEC 61010-2-201:2017 RLV" do
-    let(:original) { "IEC 61010-2-201:2017 RLV" }
+    let(:pubid) { "IEC 61010-2-201:2017 RLV" }
+    let(:urn) { "urn:iec:std:iec:61010:-2-201:2017:rlv" }
 
-    it { expect(subject.to_s).to eq(original) }
+    it_behaves_like "converts pubid to pubid"
+    it_behaves_like "converts pubid to urn"
   end
 
   context "IEC 61666:2010+AMD1:2021 CSV" do
-    let(:original) { "IEC 61666:2010+AMD1:2021 CSV" }
+    let(:pubid) { "IEC 61666:2010+AMD1:2021 CSV" }
+    let(:urn) { "urn:iec:std:iec:61666:2010:csv:amd:2021:v1" }
 
-    it { expect(subject.to_s).to eq(original) }
+    it_behaves_like "converts pubid to pubid"
+    it_behaves_like "converts pubid to urn"
   end
 
   context "IEC 62439-1:2010+AMD1:2012+AMD2:2016 CSV" do
-    let(:original) { "IEC 62439-1:2010+AMD1:2012+AMD2:2016 CSV" }
+    let(:pubid) { "IEC 62439-1:2010+AMD1:2012+AMD2:2016 CSV" }
+    let(:urn) { "urn:iec:std:iec:62439:-1:2010:csv:amd:2016:v2:amd:2012:v1" }
 
-    it { expect(subject.to_s).to eq(original) }
+    it_behaves_like "converts pubid to pubid"
+    it_behaves_like "converts pubid to urn"
   end
 
   context "IEC 60050-102:2007/AMD1:2017 ED1" do
-    let(:original) { "IEC 60050-102:2007/AMD1:2017 ED1" }
+    let(:pubid) { "IEC 60050-102:2007/AMD1:2017 ED1" }
+    let(:urn) { "urn:iec:std:iec:60050:-102:2007:ed-1:amd:2017:v1" }
 
-    it { expect(subject.to_s).to eq(original) }
+    it_behaves_like "converts pubid to pubid"
+    it_behaves_like "converts pubid to urn"
   end
 
   context "IEC 60050-111/AMD1/FRAG1 ED2" do
-    let(:original) { "IEC 60050-111/AMD1/FRAG1 ED2" }
+    let(:pubid) { "IEC 60050-111/AMD1/FRAG1 ED2" }
+    let(:urn) { "urn:iec:std:iec:60050:-111:ed-2:amd:1:v1:frag:1" }
 
-    it { expect(subject.to_s).to eq(original) }
+    it_behaves_like "converts pubid to pubid"
+    it_behaves_like "converts pubid to urn"
   end
 
   context "IEC CA 01:2020 CSV" do
-    let(:original) { "IEC CA 01:2020 CSV" }
+    let(:pubid) { "IEC CA 01:2020 CSV" }
+    let(:urn) { "urn:iec:std:iec:ca:01:2020:csv" }
 
-    it { expect(subject.to_s).to eq(original) }
+    it_behaves_like "converts pubid to pubid"
+    it_behaves_like "converts pubid to urn"
   end
 
   context "IECEE TRF 10079-1A:2020" do
-    let(:original) { "IECEE TRF 10079-1A:2020" }
+    let(:pubid) { "IECEE TRF 10079-1A:2020" }
+    let(:urn) { "urn:iec:std:iecee:trf:10079:-1A:2020" }
 
-    it { expect(subject.to_s).to eq(original) }
+    it_behaves_like "converts pubid to pubid"
+    it_behaves_like "converts pubid to urn"
   end
 
   context "IECEx TRF 16852v2A:2017" do
     let(:original) { "IECEx TRF 16852v2A:2017" }
     let(:pubid) { "IECEx TRF 16852v2A:2017" }
+    let(:urn) { "urn:iec:std:iecex:trf:16852:2017:v2A" }
 
     it_behaves_like "converts pubid to pubid"
+    it_behaves_like "converts pubid to urn"
   end
 
   context "IECEx TRF 60079-0v7B_DS:2018" do
     let(:pubid) { "IECEx TRF 60079-0v7B_DS:2018" }
+    let(:urn) { "urn:iec:std:iecex:trf:60079:-0:2018:v7B" }
 
     it_behaves_like "converts pubid to pubid"
+    it_behaves_like "converts pubid to urn"
   end
 
   context "IECEx TRF 60079-0v7c_ds:2021" do
@@ -140,8 +166,10 @@ RSpec.describe Pubid::Iec::Identifier do
 
   context "IECEE TRF 60335-2-10,54B:2017" do
     let(:pubid) { "IECEE TRF 60335-2-10,54B:2017" }
+    let(:urn) { "urn:iec:std:iecee:trf:60335:-2-10,54:2017:vB" }
 
     it_behaves_like "converts pubid to pubid"
+    it_behaves_like "converts pubid to urn"
   end
 
   context "IECEE TRF 60086-1&2A:2017" do
@@ -153,14 +181,18 @@ RSpec.describe Pubid::Iec::Identifier do
 
   context "IECEE TRF 60335-2-6,9,25B:2020" do
     let(:pubid) { "IECEE TRF 60335-2-6,9,25B:2020" }
+    let(:urn) { "urn:iec:std:iecee:trf:60335:-2-6,9,25:2020:vB" }
 
     it_behaves_like "converts pubid to pubid"
+    it_behaves_like "converts pubid to urn"
   end
 
   context "IECEE TRF CISPR 15K:2019" do
     let(:pubid) { "IECEE TRF CISPR 15K:2019" }
+    let(:urn) { "urn:iec:std:iecee:trf:cispr:15K:2019" }
 
     it_behaves_like "converts pubid to pubid"
+    it_behaves_like "converts pubid to urn"
   end
 
   context "IECEE TRF cispr 15N:2022" do
@@ -173,8 +205,10 @@ RSpec.describe Pubid::Iec::Identifier do
   context "IECEE TRF 60127-2-iBI:2011" do
     let(:original) { "IECEE TRF 60127-2-iBI:2011" }
     let(:pubid) { "IECEE TRF 60127-2B_I:2011" }
+    let(:urn) { "urn:iec:std:iecee:trf:60127:-2:2011:vB_I" }
 
     it_behaves_like "converts pubid to pubid"
+    it_behaves_like "converts pubid to urn"
   end
 
   context "IECEE TRF 60601-1-2J_EMC:2021" do

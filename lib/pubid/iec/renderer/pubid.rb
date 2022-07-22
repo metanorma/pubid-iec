@@ -1,5 +1,5 @@
-module Pubid::Iec
-  class Renderer < Pubid::Core::Renderer::Base
+module Pubid::Iec::Renderer
+  class Pubid < Pubid::Core::Renderer::Base
     def render_identifier(params)
       "%{publisher}%{copublisher}%{type}%{stage}%{trf_publisher} %{number}%{part}%{conjuction_part}"\
       "%{part_version}%{trf_version}%{version}%{iteration}%{decision_sheet}%{trf_series}%{test_type}"\
