@@ -24,7 +24,7 @@ module Pubid::Iec::Renderer
     end
 
     def render_trf_version(trf_version, _opts, _params)
-      ":v#{trf_version}"
+      ":v#{trf_version}" unless trf_version.empty?
     end
 
     def render_conjuction_part(conjuction_parts, _opts, _params)
