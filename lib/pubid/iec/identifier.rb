@@ -4,6 +4,11 @@ module Pubid::Iec
     attr_accessor :vap, :database, :fragment, :version, :decision_sheet,
                   :conjuction_part, :part_version, :trf_publisher,
                   :trf_series, :trf_version, :test_type
+
+    def urn
+      Renderer::Urn.new(get_params).render
+    end
+
     class << self
       def get_amendment_class
         Amendment
@@ -18,7 +23,7 @@ module Pubid::Iec
       end
 
       def get_renderer_class
-        Renderer
+        Renderer::Pubid
       end
 
       def get_transformer_class
