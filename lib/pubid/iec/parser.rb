@@ -18,6 +18,10 @@ module Pubid::Iec
       str("_") >> (str("EMC") | str("SOF") | str("PS")).as(:test_type)
     end
 
+    rule(:trf_part) do
+      (str("-") | str("/")) >> space? >> (match['[\d]'] | str("-")).repeat(1).as(:part)
+    end
+
     rule(:part) do
       (str("-") | str("/")) >> space? >>
         (str("Amd") | str("Cor")).absent? >> (match['[\dA-Z]'] | str("-")).repeat(1).as(:part)
@@ -71,16 +75,27 @@ module Pubid::Iec
 
     rule(:std_document_body) do
       (type >> space).maybe >>
-        (organization.as(:trf_publisher) >> space).maybe >>
         ((digits | str("SYMBOL")) >> match("[A-Z]").maybe).as(:number) >>
         edition.maybe >>
         part.maybe >>
         conjuction_part.maybe >>
-        trf_version.maybe >>
-        test_type.maybe >>
         (space? >> str(":") >> year).maybe >>
         ((amendment >> corrigendum.maybe) | corrigendum).repeat >>
         fragment.maybe
+    end
+
+    rule(:trf_document_body) do
+      str("TRF").as(:type) >> space >>
+      (organization.as(:trf_publisher) >> space).maybe >>
+      ((digits | str("SYMBOL")) >> match("[A-Z]").maybe).as(:number) >>
+      edition.maybe >>
+      trf_part.maybe >>
+      conjuction_part.maybe >>
+      trf_version.maybe >>
+      test_type.maybe >>
+      (space? >> str(":") >> year).maybe >>
+      ((amendment >> corrigendum.maybe) | corrigendum).repeat >>
+      fragment.maybe
     end
 
     rule(:vap) do
@@ -93,7 +108,7 @@ module Pubid::Iec
 
     rule(:identifier) do
         originator >> (space | str("/")) >>
-        std_document_body >>
+        (trf_document_body | std_document_body) >>
         vap.maybe >> database.maybe >>
         edition.maybe >>
         decision_sheet.maybe >>
