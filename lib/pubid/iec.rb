@@ -5,9 +5,11 @@ module Pubid
   module Iec
 
   end
-end
 
-UPDATE_CODES = YAML.load_file(File.join(File.dirname(__FILE__), "../../update_codes.yaml"))
+  module Core
+    UPDATE_CODES = YAML.load_file(File.join(File.dirname(__FILE__), "../../update_codes.yaml"))
+  end
+end
 
 require_relative "iec/parser"
 require_relative "iec/amendment"
