@@ -62,7 +62,7 @@ module Pubid::Iec
     end
 
     rule(:conjuction_part) do
-      (str(",") >> digits.as(:conjuction_part)).repeat(1)
+      ((str(",") | str("&")) >> digits.as(:conjuction_part)).repeat(1)
     end
 
     rule(:trf_version) do

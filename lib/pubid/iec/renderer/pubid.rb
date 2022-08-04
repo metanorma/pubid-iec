@@ -43,10 +43,20 @@ module Pubid::Iec::Renderer
     end
 
     def render_conjuction_part(conjuction_parts, _opts, _params)
-      if conjuction_parts.is_a?(Array)
-        conjuction_parts.map(&:to_i).sort.map { |conjuction_part| ",#{conjuction_part}" }.join
+      conjunction_symbol = case _params[:publisher]
+      when "IECEE"
+        # IECEE TRFs use '&' as parts separator (IECEE OD-2020)
+        "&"
       else
-        ",#{conjuction_parts}"
+        # when "IECEx"
+        # IECEx TRFs use ',' as parts separator (IECEx OD-010-1)
+        ","
+      end
+
+      if conjuction_parts.is_a?(Array)
+        conjuction_parts.map(&:to_i).sort.map { |conjuction_part| "#{conjunction_symbol}#{conjuction_part}" }.join
+      else
+        "#{conjunction_symbol}#{conjuction_parts}"
       end
     end
 

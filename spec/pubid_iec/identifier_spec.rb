@@ -165,7 +165,7 @@ RSpec.describe Pubid::Iec::Identifier do
   end
 
   context "IECEE TRF 60335-2-10,54B:2017" do
-    let(:pubid) { "IECEE TRF 60335-2-10,54B:2017" }
+    let(:pubid) { "IECEE TRF 60335-2-10&54B:2017" }
     let(:urn) { "urn:iec:std:iecee:trf:60335:-2-10,54:2017:vB" }
 
     it_behaves_like "converts pubid to pubid"
@@ -174,13 +174,13 @@ RSpec.describe Pubid::Iec::Identifier do
 
   context "IECEE TRF 60086-1&2A:2017" do
     let(:original) { "IECEE TRF 60086-1&2A:2017" }
-    let(:pubid) { "IECEE TRF 60086-1,2A:2017" }
+    let(:pubid) { "IECEE TRF 60086-1&2A:2017" }
 
     it_behaves_like "converts pubid to pubid"
   end
 
   context "IECEE TRF 60335-2-6,9,25B:2020" do
-    let(:pubid) { "IECEE TRF 60335-2-6,9,25B:2020" }
+    let(:pubid) { "IECEE TRF 60335-2-6&9&25B:2020" }
     let(:urn) { "urn:iec:std:iecee:trf:60335:-2-6,9,25:2020:vB" }
 
     it_behaves_like "converts pubid to pubid"
