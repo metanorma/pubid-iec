@@ -229,8 +229,7 @@ RSpec.describe Pubid::Iec::Identifier do
     it_behaves_like "converts pubid to pubid"
   end
 
-  context "IECEE TRF 60335-2-34A35C:1997" do
-    let(:original) { "IECEE TRF 60335-2-34A35C:1997" }
+  context "IECEE TRF 60335-2-35C:1997" do
     let(:pubid) { "IECEE TRF 60335-2-35C:1997" }
 
     it_behaves_like "converts pubid to pubid"
