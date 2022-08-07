@@ -8,7 +8,7 @@ module Pubid::Iec
     end
 
     rule(:stage) do
-      str("PNW") | str("PWI")
+      array_to_str(Renderer::Urn::STAGES.keys)
     end
 
     rule(:type) do
