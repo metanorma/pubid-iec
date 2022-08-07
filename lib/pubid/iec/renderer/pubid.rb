@@ -14,6 +14,10 @@ module Pubid::Iec::Renderer
       " #{vap}"
     end
 
+    def render_stage(stage, _opts, _params)
+      " #{stage}"
+    end
+
     def render_fragment(fragment, _opts, _params)
       "/FRAG#{fragment}"
     end

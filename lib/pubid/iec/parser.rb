@@ -4,7 +4,11 @@ module Pubid::Iec
   class Parser < Pubid::Core::Parser
     rule(:organization) do
       str("IECEE") | str("IECEx") | str("IECQ") | str("IEC") | str("ISO") |
-        str("IEEE") | str("CISPR") | str("PNW")
+        str("IEEE") | str("CISPR")
+    end
+
+    rule(:stage) do
+      str("PNW") | str("PWI")
     end
 
     rule(:type) do
@@ -73,9 +77,15 @@ module Pubid::Iec
       str("_SE").as(:trf_series)
     end
 
+    rule(:number) do
+      (digits | str("SYMBOL") | str("SYCSMARTENERGY") | str("SyCLVDC") |
+        str("SYCLVDC") | str("SyCCOMM") | str("SyCAAL")) >>
+        match("[A-Z]").maybe
+    end
+
     rule(:std_document_body) do
       (type >> space).maybe >>
-        ((digits | str("SYMBOL")) >> match("[A-Z]").maybe).as(:number) >>
+        number.as(:number) >>
         edition.maybe >>
         part.maybe >>
         conjuction_part.maybe >>
@@ -107,7 +117,7 @@ module Pubid::Iec
     end
 
     rule(:identifier) do
-        originator >> (space | str("/")) >>
+        originator.maybe >> (space.maybe >> stage.as(:stage)).maybe >> (space | str("/")) >>
         (trf_document_body | std_document_body) >>
         vap.maybe >> database.maybe >>
         edition.maybe >>

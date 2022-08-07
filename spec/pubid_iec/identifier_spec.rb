@@ -236,6 +236,24 @@ RSpec.describe Pubid::Iec::Identifier do
     it_behaves_like "converts pubid to pubid"
   end
 
+  context "PWI 100-44 ED1" do
+    let(:original) { "PWI 100-44 ED1" }
+    let(:pubid) { "IEC PWI 100-44 ED1"}
+    let(:urn) { "urn:iec:std:iec:100:-44:stage-00.00:ed-1" }
+
+    it_behaves_like "converts pubid to pubid"
+    it_behaves_like "converts pubid to urn"
+  end
+
+  context "PWI SRD SyCCOMM-1 ED1" do
+    let(:original) { "PWI SRD SyCCOMM-1 ED1" }
+    let(:pubid) { "IEC SRD PWI SyCCOMM-1 ED1" }
+    let(:urn) { "urn:iec:std:iec:srd:syccomm:-1:stage-00.00:ed-1" }
+
+    it_behaves_like "converts pubid to pubid"
+    it_behaves_like "converts pubid to urn"
+  end
+
   context "database identifier" do
     context "when have DB" do
       let(:original) { "IEC 60061:2022 DB" }

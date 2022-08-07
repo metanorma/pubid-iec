@@ -5,6 +5,11 @@ module Pubid::Iec
                   :conjuction_part, :part_version, :trf_publisher,
                   :trf_series, :trf_version, :test_type
 
+    def initialize(publisher: "IEC", stage: nil, **args)
+      @stage = stage.to_s if stage
+      super(**args.merge(publisher: publisher))
+    end
+
     def urn
       Renderer::Urn.new(get_params).render
     end
