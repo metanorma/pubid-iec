@@ -1,10 +1,66 @@
 module Pubid::Iec::Renderer
   class Urn < ::Pubid::Core::Renderer::Urn
+    STAGES = { ACD: 20.99,
+               ACDV: 30.99,
+               ADTR: 40.99,
+               ADTS: 40.99,
+               AFDIS: 40.99,
+               APUB: 50.99,
+               BPUB: 60,
+               CAN: 30.98,
+               CCDV: 40.20,
+               CD: 30.20,
+               CDISH: 50.20,
+               CDM: 30.60,
+               CDPAS: 50.20,
+               CDTR: 50.20,
+               CDTS: 50.20,
+               CDVM: 40.91,
+               CFDIS: 50.20,
+               DECDISH: 50.00,
+               DECFDIS: 50.00,
+               DECPUB: 60.00,
+               DEL: 10.98,
+               DELPUB: 99.60,
+               DTRM: 50.92,
+               DTSM: 50.92,
+               MERGED: 30.97,
+               NCDV: 40.91,
+               NDTR: 50.92,
+               NDTS: 50.92,
+               NFDIS: 50.92,
+               PCC: 30.60,
+               PNW: 10.20,
+               PPUB: 60.60,
+               PRVC: 40.60,
+               PRVD: 50.60,
+               PRVDISH: 50.60,
+               PRVDPAS: 50.60,
+               PRVDTR: 50.60,
+               PRVDTS: 50.60,
+               PRVN: 10.60,
+               PWI: 0,
+               RDISH: 50.00,
+               RFDIS: 50.00,
+               RPUB: 60.00,
+               SPLIT: 30.96,
+               TCDV: 40.00,
+               TDISH: 50.00,
+               TDTR: 50.00,
+               TDTS: 50.00,
+               TPUB: 60.00,
+               WPUB: 95.99
+    }.freeze
+
     def render_identifier(params)
       "urn:iec:std:%{publisher}%{copublisher}%{type}%{trf_publisher}:%{number}"\
       "%{part}%{conjuction_part}%{year}%{stage}%{vap}"\
       "%{urn_stage}%{corrigendum_stage}%{iteration}%{version}%{part_version}"\
       "%{trf_version}%{edition}%{amendments}%{corrigendums}%{fragment}%{language}" % params
+    end
+
+    def render_number(number, _opts, _params)
+      number.to_s.downcase
     end
 
     def render_vap(vap, _opts, _params)
@@ -37,6 +93,10 @@ module Pubid::Iec::Renderer
 
     def render_trf_publisher(trf_publisher, _opts, _params)
       ":#{trf_publisher.downcase}"
+    end
+
+    def render_stage(stage, _opts, params)
+      ":stage-#{sprintf('%05.2f', STAGES[stage.to_sym])}"
     end
   end
 end
