@@ -51,6 +51,12 @@ RSpec.describe Pubid::Iec::Identifier do
 
       it_behaves_like "parse identifiers from file"
     end
+
+    context "parses identifiers from ico-iec-pubid.txt" do
+      let(:examples_file) { "iso-iec-pubid.txt" }
+
+      it_behaves_like "parse identifiers from file"
+    end
   end
 
   shared_examples "converts pubid to pubid" do
@@ -245,6 +251,12 @@ RSpec.describe Pubid::Iec::Identifier do
 
     it_behaves_like "converts pubid to pubid"
     it_behaves_like "converts pubid to urn"
+  end
+
+  context "ISO/IEC VIM:1993" do
+    let(:pubid) { "ISO/IEC VIM:1993" }
+
+    it_behaves_like "converts pubid to pubid"
   end
 
   context "database identifier" do

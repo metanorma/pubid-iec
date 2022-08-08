@@ -57,10 +57,6 @@ module Pubid::Iec
         (str(":") >> digits.as(:number)).maybe).as(:corrigendums)
     end
 
-    rule(:number) do
-      (digits >> str("A").maybe) | str("SYMBOL")
-    end
-
     rule(:decision_sheet) do
       (str("_DS") | str("_ds")).as(:decision_sheet)
     end
@@ -79,7 +75,7 @@ module Pubid::Iec
 
     rule(:number) do
       (digits | str("SYMBOL") | str("SYCSMARTENERGY") | str("SyCLVDC") |
-        str("SYCLVDC") | str("SyCCOMM") | str("SyCAAL")) >>
+        str("SYCLVDC") | str("SyCCOMM") | str("SyCAAL") | str("VIM")) >>
         match("[A-Z]").maybe
     end
 
