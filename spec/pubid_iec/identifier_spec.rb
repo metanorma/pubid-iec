@@ -23,18 +23,18 @@ RSpec.describe Pubid::Iec::Identifier do
     end
 
 
-    context "parses identifiers from pubid-parsed.txt" do
+    context "parses identifiers from iec-pubid.txt" do
       let(:examples_file) { "iec-pubid.txt" }
 
       it_behaves_like "parse identifiers from file"
     end
 
-    context "parses identifiers from tr-pubid.txt" do
+    context "parses TR identifiers from tr-pubid.txt" do
       let(:examples_file) { "tr-pubid.txt" }
       it_behaves_like "parse identifiers from file"
     end
 
-    context "parses identifiers from ts-pubid.txt" do
+    context "parses TS identifiers from ts-pubid.txt" do
       let(:examples_file) { "ts-pubid.txt" }
 
       it_behaves_like "parse identifiers from file"
@@ -52,7 +52,7 @@ RSpec.describe Pubid::Iec::Identifier do
       it_behaves_like "parse identifiers from file"
     end
 
-    context "parses identifiers from ico-iec-pubid.txt" do
+    context "parses identifiers from iso-iec-pubid.txt" do
       let(:examples_file) { "iso-iec-pubid.txt" }
 
       it_behaves_like "parse identifiers from file"
