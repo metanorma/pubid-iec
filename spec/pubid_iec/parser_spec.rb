@@ -32,8 +32,14 @@ RSpec.describe Pubid::Iec::Parser do
       it_behaves_like "parse identifiers from file"
     end
 
-    context "parses identifiers from trf-pubid.txt" do
-      let(:examples_file) { "trf-pubid.txt" }
+    context "parses IECEx TRF identifiers" do
+      let(:examples_file) { "iecex-trf-pubid.txt" }
+
+      it_behaves_like "parse identifiers from file"
+    end
+
+    context "parses IECEE TRF identifiers" do
+      let(:examples_file) { "iecee-trf-pubid.txt" }
 
       it_behaves_like "parse identifiers from file"
     end
