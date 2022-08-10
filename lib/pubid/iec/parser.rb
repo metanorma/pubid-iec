@@ -105,7 +105,8 @@ module Pubid::Iec
     end
 
     rule(:vap) do
-      space >> (str("CSV") | str("SER") | str("RLV")).as(:vap)
+      space >> (str("CSV") | str("SER") | str("RLV") | str("CMV") | str("EXV") |
+        str("PAC") | str("PRV")).as(:vap)
     end
 
     rule(:database) do
