@@ -53,10 +53,10 @@ module Pubid::Iec::Renderer
     }.freeze
 
     def render_identifier(params)
-      "urn:iec:std:%{publisher}%{copublisher}%{type}%{trf_publisher}:%{number}"\
+      "urn:iec:std:%{publisher}%{copublisher}%{type}:%{number}"\
       "%{part}%{conjuction_part}%{year}%{stage}%{vap}"\
       "%{urn_stage}%{corrigendum_stage}%{iteration}%{version}%{part_version}"\
-      "%{trf_version}%{edition}%{amendments}%{corrigendums}%{fragment}%{language}" % params
+      "%{edition}%{amendments}%{corrigendums}%{fragment}%{language}" % params
     end
 
     def render_number(number, _opts, _params)
@@ -79,20 +79,12 @@ module Pubid::Iec::Renderer
       ":v#{part_version}"
     end
 
-    def render_trf_version(trf_version, _opts, _params)
-      ":v#{trf_version}" unless trf_version.empty?
-    end
-
     def render_conjuction_part(conjuction_parts, _opts, _params)
       if conjuction_parts.is_a?(Array)
         conjuction_parts.map(&:to_i).sort.map { |conjuction_part| ",#{conjuction_part}" }.join
       else
         ",#{conjuction_parts}"
       end
-    end
-
-    def render_trf_publisher(trf_publisher, _opts, _params)
-      ":#{trf_publisher.downcase}"
     end
 
     def render_stage(stage, _opts, params)

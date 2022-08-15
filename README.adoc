@@ -10,3 +10,37 @@ identifiers.
 . generate updated PubID
 . generate language specific PubID
 . generate dated vs undated PubIDs
+
+== IECEE TRF Format
+
+The IECEE TRF pattern is:
+[example]
+====
+IECEE TRF {number-and-part}{trf-version}[{test-type}][:{year}]
+====
+(Sample IECEE TRF PubID: IECEE TRF 60086-1&2A:2017)
+
+Where
+
+- `number-and-part` is the number and part of the IEC standard, e.g. `61000-3-33`. If there are multiple parts, the & ampersand separator is used. When parsing, we should accept the , character here, but when generating the PubID, the & separator must be used
+- `trf-version` is typically the alphabet version of a single character length, where `A` is the first version, `B` is the second version and so on.
+
+There are cases where the `trf-version` is `{version-alphabet}{sub-version}` where `sub-version` is a string, e.g. `F_II` (the `sub-version` is `_II`). In this case, the "full version" is considered to be the full string of `trf-version`, i.e. `F_II`. (in the case of `IECEE TRF 61058-1F_II:2019`)
+
+- `test-type` is an optional string such as _EMC, _PS, _SOF that indicates a specialized type of TRF
+- `year` is optional for edition year.
+
+== IECEx TRF Format
+
+The IECEx TRF pattern is:
+[example]
+====
+IECEx TRF {number-and-part}{either '_' or 'v'}{std-edition}{trf-version}
+====
+Where
+
+- `number-and-part` is the number and part of the IEC standard, e.g. `60079-0`. If there are multiple parts, the , comma separator is used.
+- `either '\_' or 'v'` is either a `_` or `v` character. In the IEC Webstore, they use a v character, e.g. `IECEx TRF 60079-15v1:2002`, but in the official IECEx identifier pattern it is `_`.
+- `std-edition` is the edition number of the underlying IEC standard, an integer.
+- `trf-version` is typically the alphabet version of a single character length, where `A` is the first version, `B` is the second version and so on.
+* There are cases where the `trf-version` is `{version-alphabet}{sub-version}` where `sub-version` is a string, e.g. `A_DS` (the `sub-version` is `_DS`) or `Arev4_ds` (the `sub-version` is `rev4_ds`). In this case, the "full version" is considered to be the full string of `trf-version`, i.e. `A_DS` or `Arev4_ds`.

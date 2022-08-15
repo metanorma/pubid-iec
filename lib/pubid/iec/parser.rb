@@ -12,18 +12,10 @@ module Pubid::Iec
     end
 
     rule(:type) do
-      (str("TRF") | str("IS") | str("TS") | str("TR") | str("PAS") | str("SRD") |
+      (str("IS") | str("TS") | str("TR") | str("PAS") | str("SRD") |
         str("TEC") | str("STTR") | str("WP") | str("Guide") | str("GUIDE") | str("OD") |
         str("CS") | str("CA")
       ).as(:type)
-    end
-
-    rule(:test_type) do
-      str("_") >> (str("EMC") | str("SOF") | str("PS")).as(:test_type)
-    end
-
-    rule(:trf_part) do
-      (str("-") | str("/")) >> space? >> (match['[\d]'] | str("-")).repeat(1).as(:part)
     end
 
     rule(:part) do
@@ -57,20 +49,8 @@ module Pubid::Iec
         (str(":") >> digits.as(:number)).maybe).as(:corrigendums)
     end
 
-    rule(:decision_sheet) do
-      (str("_DS") | str("_ds")).as(:decision_sheet)
-    end
-
     rule(:conjuction_part) do
       ((str(",") | str("&")) >> digits.as(:conjuction_part)).repeat(1)
-    end
-
-    rule(:trf_version) do
-      (match["A-Z"].maybe >> (str("_") >> match["IVX"].repeat(1)).maybe).as(:trf_version)
-    end
-
-    rule(:trf_series) do
-      str("_SE").as(:trf_series)
     end
 
     rule(:number) do
@@ -90,20 +70,6 @@ module Pubid::Iec
         fragment.maybe
     end
 
-    rule(:trf_document_body) do
-      str("TRF").as(:type) >> space >>
-      (organization.as(:trf_publisher) >> space).maybe >>
-      ((digits | str("SYMBOL")) >> match("[A-Z]").maybe).as(:number) >>
-      edition.maybe >>
-      trf_part.maybe >>
-      conjuction_part.maybe >>
-      trf_version.maybe >>
-      test_type.maybe >>
-      (space? >> str(":") >> year).maybe >>
-      ((amendment >> corrigendum.maybe) | corrigendum).repeat >>
-      fragment.maybe
-    end
-
     rule(:vap) do
       space >> (str("CSV") | str("SER") | str("RLV") | str("CMV") | str("EXV") |
         str("PAC") | str("PRV")).as(:vap)
@@ -114,13 +80,11 @@ module Pubid::Iec
     end
 
     rule(:identifier) do
-        originator.maybe >> (space.maybe >> stage.as(:stage)).maybe >> (space | str("/")) >>
-        (trf_document_body | std_document_body) >>
+      (originator.maybe >> (space.maybe >> stage.as(:stage)).maybe >> (space | str("/")) >>
+        std_document_body >>
         vap.maybe >> database.maybe >>
         edition.maybe >>
-        decision_sheet.maybe >>
-        trf_series.maybe >>
-        (str(":") >> year).maybe
+        (str(":") >> year).maybe)
     end
 
     rule(:root) { identifier }
