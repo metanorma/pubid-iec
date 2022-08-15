@@ -1,8 +1,8 @@
 module Pubid::Iec::Renderer
   class Pubid < Pubid::Core::Renderer::Base
     def render_identifier(params)
-      "%{publisher}%{copublisher}%{type}%{stage}%{trf_publisher} %{number}%{part}%{conjuction_part}"\
-      "%{part_version}%{trf_version}%{version}%{iteration}%{decision_sheet}%{trf_series}%{test_type}"\
+      "%{publisher}%{copublisher}%{type}%{stage} %{number}%{part}%{conjuction_part}"\
+      "%{part_version}%{version}%{iteration}"\
       "%{year}%{amendments}%{corrigendums}%{fragment}%{vap}%{edition}%{language}%{database}" % params
     end
 
@@ -62,18 +62,6 @@ module Pubid::Iec::Renderer
       else
         "#{conjunction_symbol}#{conjuction_parts}"
       end
-    end
-
-    def render_trf_publisher(trf_publisher, _opts, _params)
-      " #{trf_publisher}"
-    end
-
-    def render_test_type(test_type, _opts, _params)
-      "_#{test_type}"
-    end
-
-    def render_trf_series(trf_series, _opts, _params)
-      "_SE"
     end
   end
 end
