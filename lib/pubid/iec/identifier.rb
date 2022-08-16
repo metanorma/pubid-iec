@@ -52,6 +52,10 @@ module Pubid::Iec
       def get_transformer_class
         Transformer
       end
+
+      def get_update_codes
+        UPDATE_CODES
+      end
     end
 
     def database
