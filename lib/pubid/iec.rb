@@ -3,10 +3,6 @@ require "yaml"
 
 module Pubid
   module Iec
-
-  end
-
-  module Core
     UPDATE_CODES = YAML.load_file(File.join(File.dirname(__FILE__), "../../update_codes.yaml"))
   end
 end
