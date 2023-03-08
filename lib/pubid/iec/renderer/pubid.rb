@@ -1,7 +1,7 @@
 module Pubid::Iec::Renderer
   class Pubid < Pubid::Core::Renderer::Base
     def render_identifier(params)
-      "%{publisher}%{copublisher}%{type}%{stage} %{number}%{part}%{conjuction_part}"\
+      "%{publisher}%{type}%{stage} %{number}%{part}%{conjuction_part}"\
       "%{part_version}%{version}%{iteration}"\
       "%{year}%{amendments}%{corrigendums}%{fragment}%{vap}%{edition}%{language}%{database}" % params
     end

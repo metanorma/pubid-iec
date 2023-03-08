@@ -34,8 +34,8 @@ module Pubid::Iec
     rule(:amendment) do
       ((str("/") | str("+") | space).maybe >>
         str("AMD") >>
-        digits.as(:version) >>
-        (str(":") >> digits.as(:number)).maybe).as(:amendments)
+        digits.as(:number) >>
+        (str(":") >> digits.as(:year)).maybe).as(:amendments)
     end
 
     rule(:fragment) do
@@ -45,8 +45,8 @@ module Pubid::Iec
     rule(:corrigendum) do
       ((str("/") | space).maybe >>
         str("COR") >>
-        digits.as(:version) >>
-        (str(":") >> digits.as(:number)).maybe).as(:corrigendums)
+        digits.as(:number) >>
+        (str(":") >> digits.as(:year)).maybe).as(:corrigendums)
     end
 
     rule(:conjuction_part) do

@@ -88,7 +88,11 @@ module Pubid::Iec::Renderer
     end
 
     def render_stage(stage, _opts, params)
-      ":stage-#{sprintf('%05.2f', STAGES[stage.to_sym])}"
+      ":stage-#{sprintf('%05.2f', stage.to_s(:urn))}"
+    end
+
+    def render_type(type, _, _)
+      ":#{type.type.to_s}"
     end
   end
 end
