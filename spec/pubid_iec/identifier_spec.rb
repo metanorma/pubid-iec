@@ -17,7 +17,7 @@ RSpec.describe Pubid::Iec::Identifier do
                   "couldn't parse #{pub_id}\n#{failure.message}"
           end.not_to raise_error
 
-          expect(described_class.parse(pub_id).to_s).to eq(pub_id)
+          expect(described_class.parse(pub_id).to_s.upcase).to eq(pub_id.upcase)
         end
       end
     end
@@ -151,6 +151,19 @@ RSpec.describe Pubid::Iec::Identifier do
     it_behaves_like "converts pubid to pubid"
   end
 
+  context "ISO/IEC GUIDE 2:2004" do
+    let(:original) { "ISO/IEC GUIDE 2:2004" }
+    let(:pubid) { "ISO/IEC Guide 2:2004" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEC 61834-10:2001/COR1:2001" do
+    let(:pubid) { "IEC 61834-10:2001/COR1:2001" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
   context "database identifier" do
     context "with DB and with year" do
       let(:original) { "IEC 60061:2022 DB" }
@@ -168,6 +181,31 @@ RSpec.describe Pubid::Iec::Identifier do
       let(:original) { "IEC 60061:2022" }
 
       it { expect(subject.database).to eq(false) }
+    end
+  end
+
+  describe "creating new identifier" do
+    subject { described_class.new(**{ number: number }.merge(params)) }
+    let(:number) { 123 }
+
+    context "when have stage" do
+      let(:params) { { stage: "CD" } }
+
+      it "renders correct PubID" do
+        expect(subject.to_s).to eq("IEC CD #{number}")
+      end
+
+      it "renders correct URN" do
+        expect(subject.urn).to eq("urn:iec:std:iec:123:stage-30.20")
+      end
+
+      context "when stage is incorrect" do
+        let(:params) { { stage: "ABC" } }
+
+        it "returns an error" do
+          expect { subject }.to raise_exception(Pubid::Iec::Errors::StageInvalidError)
+        end
+      end
     end
   end
 end

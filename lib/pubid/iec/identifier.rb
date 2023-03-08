@@ -10,8 +10,9 @@ module Pubid::Iec
                    fragment: nil, version: nil, decision_sheet: nil,
                    conjuction_part: nil, part_version: nil, trf_publisher: nil,
                    trf_series: nil, trf_version: nil, test_type: nil,
-                   edition: nil, **args)
-      @stage = stage.to_s if stage
+                   edition: nil, type: nil, **args)
+      # @stage = stage.to_s if stage
+      @stage = Stage.parse(stage) if stage
       @vap = vap.to_s if vap
       @database = database if database
       @fragment = fragment if fragment
@@ -24,6 +25,7 @@ module Pubid::Iec
       @trf_version = trf_version.to_s if trf_version
       @test_type = test_type if test_type
       @edition = edition.to_s if edition
+      @type = Type.parse(type) if type
 
       super(**args.merge(publisher: publisher))
     end

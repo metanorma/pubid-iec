@@ -7,6 +7,9 @@ module Pubid
   end
 end
 
+require_relative "iec/errors"
+require_relative "iec/stage"
+require_relative "iec/type"
 require_relative "iec/parser"
 require_relative "iec/trf_parser"
 require_relative "iec/amendment"
