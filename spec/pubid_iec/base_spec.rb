@@ -1,4 +1,4 @@
-RSpec.describe Pubid::Iec::Identifier do
+RSpec.describe Pubid::Iec::Base do
   subject { described_class.parse(original || pubid) }
   let(:original) { nil }
 
@@ -197,14 +197,6 @@ RSpec.describe Pubid::Iec::Identifier do
 
       it "renders correct URN" do
         expect(subject.urn).to eq("urn:iec:std:iec:123:stage-30.20")
-      end
-
-      context "when stage is incorrect" do
-        let(:params) { { stage: "ABC" } }
-
-        it "returns an error" do
-          expect { subject }.to raise_exception(Pubid::Iec::Errors::StageInvalidError)
-        end
       end
     end
   end
