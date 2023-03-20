@@ -1,5 +1,5 @@
 module Pubid::Iec
-  class TrfIdentifier < Identifier
+  class TrfIdentifier < Base
 
     attr_accessor :version, :decision_sheet,
                   :conjuction_part, :part_version, :trf_publisher,

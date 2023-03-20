@@ -1,0 +1,99 @@
+abbreviations:
+  ACD: "20.99"
+  ACDV: "30.99"
+  ADTR: "40.99"
+  ADTS: "40.99"
+  AFDIS: "40.99"
+  APUB: "50.99"
+  BPUB: "60.00"
+  CAN: "30.98"
+  CCDV: "40.20"
+  CD: "30.20"
+  CDISH: "50.20"
+  CDM: "30.60"
+  CDPAS: "50.20"
+  CDTR: "50.20"
+  CDTS: "50.20"
+  CDVM: "40.91"
+  CFDIS: "50.20"
+  DECDISH: "50.00"
+  DECFDIS: "50.00"
+  DECPUB: "60.00"
+  DEL: "10.98"
+  DELPUB: "99.60"
+  DTRM: "50.92"
+  DTSM: "50.92"
+  MERGED: "30.97"
+  NCDV: "40.91"
+  NDTR: "50.92"
+  NDTS: "50.92"
+  NFDIS: "50.92"
+  PCC: "30.60"
+  PNW: "10.20"
+  PPUB: "60.60"
+  PRVC: "40.60"
+  PRVD: "50.60"
+  PRVDISH: "50.60"
+  PRVDPAS: "50.60"
+  PRVDTR: "50.60"
+  PRVDTS: "50.60"
+  PRVN: "10.60"
+  PWI: "00.00"
+  RDISH: "50.00"
+  RFDIS: "50.00"
+  RPUB: "60.00"
+  SPLIT: "30.96"
+  TCDV: "40.00"
+  TDISH: "50.00"
+  TDTR: "50.00"
+  TDTS: "50.00"
+  TPUB: "60.00"
+  WPUB: "95.99"
+
+codes_description:
+  "00.00": Proposal for new project received
+  "00.20": Proposal for new project under review
+  "00.60": Close of review
+  "00.98": Proposal for new project abandoned
+  "00.99": Approval to ballot proposal for new project
+  "10.00": Proposal for new project registered
+  "10.20": New project ballot initiated
+  "10.60": Close of voting
+  "10.92": Proposal returned to submitter for further definition
+  "10.98": New project rejected
+  "10.99": New project approved
+  "20.00": New project registered in TC/SC work programme
+  "20.20": Working draft (WD) study initiated
+  "20.60": Close of comment period
+  "20.98": Project deleted
+  "20.99": WD approved for registration as CD
+  "30.00": Committee draft (CD) registered
+  "30.20": CD study/ballot initiated
+  "30.60": Close of voting/ comment period
+  "30.92": CD referred back to Working Group
+  "30.98": Project deleted
+  "30.99": CD approved for registration as DIS
+  "40.00": DIS registered
+  "40.20": "DIS ballot initiated: 12 weeks"
+  "40.60": Close of voting
+  "40.93": "Full report circulated: decision for new DIS ballot"
+  "40.98": Project deleted
+  "40.92": "Full report circulated: DIS referred back to TC or SC"
+  "40.99": "Full report circulated: DIS approved for registration as FDIS"
+  "50.00": Final text received or FDIS registered for formal approval
+  "50.20": "Proof sent to secretariat or FDIS ballot initiated: 8 weeks"
+  "50.60": Close of voting. Proof returned by secretariat
+  "50.92": FDIS or proof referred back to TC or SC
+  "50.98": Project deleted
+  "50.99": FDIS or proof approved for publication
+  "60.00": International Standard under publication
+  "60.60": International Standard published
+  "90.20": International Standard under systematic review
+  "90.60": Close of review
+  "90.92": International Standard to be revised
+  "90.93": International Standard confirmed
+  "90.99": Withdrawal of International Standard proposed by TC or SC
+  "95.20": Withdrawal ballot initiated
+  "95.60": Close of voting
+  "95.92": Decision not to withdraw International Standard
+  "95.99": Withdrawal of International Standard
