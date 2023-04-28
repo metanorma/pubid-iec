@@ -4,7 +4,7 @@ module Pubid::Iec
   class Parser < Pubid::Core::Parser
     rule(:organization) do
       str("IECEE") | str("IECEx") | str("IECQ") | str("IEC") | str("ISO") |
-        str("IEEE") | str("CISPR")
+        str("IEEE") | str("CISPR") | str("ASTM")
     end
 
     rule(:stage) do
