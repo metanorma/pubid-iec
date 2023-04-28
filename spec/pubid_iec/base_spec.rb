@@ -164,6 +164,12 @@ RSpec.describe Pubid::Iec::Base do
     it_behaves_like "converts pubid to pubid"
   end
 
+  context "IEC/ASTM 62885-6:2018" do
+    let(:pubid) { "IEC/ASTM 62885-6:2018" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
   context "database identifier" do
     context "with DB and with year" do
       let(:original) { "IEC 60061:2022 DB" }
