@@ -12,10 +12,7 @@ module Pubid::Iec
     end
 
     rule(:type) do
-      (str("IS") | str("TS") | str("TR") | str("PAS") | str("SRD") |
-        str("TEC") | str("STTR") | str("WP") | str("Guide") | str("GUIDE") | str("OD") |
-        str("CS") | str("CA")
-      ).as(:type)
+      array_to_str(Identifier.config.types.map { |type| type.type[:short] }.flatten.compact).as(:type)
     end
 
     rule(:part) do

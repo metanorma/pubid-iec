@@ -10,7 +10,6 @@ end
 require "pubid-core"
 require_relative "iec/errors"
 require_relative "iec/stage"
-# require_relative "iec/type"
 require_relative "iec/parser"
 require_relative "iec/trf_parser"
 require_relative "iec/amendment"
@@ -21,57 +20,32 @@ require_relative "iec/renderer/urn"
 require_relative "iec/renderer/trf_urn"
 require_relative "iec/transformer"
 require_relative "iec/identifier/base"
+require_relative "iec/identifier/international_standard"
+require_relative "iec/identifier/technical_report"
+require_relative "iec/identifier/technical_specification"
+require_relative "iec/identifier/publicly_available_specification"
+require_relative "iec/identifier/guide"
+require_relative "iec/identifier/operational_document"
+require_relative "iec/identifier/component_specification"
+require_relative "iec/identifier/systems_reference_document"
+require_relative "iec/identifier/conformity_assessment"
+require_relative "iec/identifier/test_report_form"
 require_relative "iec/trf_identifier"
 require_relative "iec/identifier"
 
 config = Pubid::Core::Configuration.new
 config.stages = YAML.load_file(File.join(File.dirname(__FILE__), "../../stages.yaml"))
 config.stage_class = Pubid::Iec::Stage
-config.type_names = { is: {
-                        long: "International Standard",
-                        short: "IS",
-                      },
-                      ts: {
-                        long: "Technical Specification",
-                        short: "TS",
-                      },
-                      tr: {
-                        long: "Technical Report",
-                        short: "TR",
-                      },
-                      pas: {
-                        long: "Publicly Available Specification",
-                        short: "PAS",
-                      },
-                      srd: {
-                        short: "SRD",
-                      },
-                      tec: {
-                        short: "TEC",
-                      },
-                      sttr: {
-                        short: "STTR",
-                      },
-                      wp: {
-                        short: "WP",
-                      },
-                      guide: {
-                        long: "Guide",
-                        short: "Guide",
-                      },
-                      od: {
-                        short: "OD",
-                      },
-                      cs: {
-                        short: "CS",
-                      },
-                      ca: {
-                        short: "CA",
-                      },
-                      trf: {
-                        long: "Test Report Form",
-                        short: "TRF",
-                      }
+config.default_type = Pubid::Iec::Identifier::InternationalStandard
+config.types = [Pubid::Iec::Identifier::InternationalStandard,
+                Pubid::Iec::Identifier::TechnicalReport,
+                Pubid::Iec::Identifier::TechnicalSpecification,
+                Pubid::Iec::Identifier::PubliclyAvailableSpecification,
+                Pubid::Iec::Identifier::Guide,
+                Pubid::Iec::Identifier::OperationalDocument,
+                Pubid::Iec::Identifier::ComponentSpecification,
+                Pubid::Iec::Identifier::SystemsReferenceDocument,
+                Pubid::Iec::Identifier::ConformityAssessment,
+                Pubid::Iec::Identifier::TestReportForm]
 
-                    }.freeze
 Pubid::Iec::Identifier.set_config(config)

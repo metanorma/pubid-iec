@@ -92,7 +92,7 @@ module Pubid::Iec::Renderer
     end
 
     def render_type(type, _, _)
-      ":#{type.type.to_s}"
+      ":#{type.downcase}"
     end
   end
 end
