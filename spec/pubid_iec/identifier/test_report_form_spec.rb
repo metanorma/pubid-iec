@@ -1,4 +1,4 @@
-RSpec.describe Pubid::Iec::TrfIdentifier do
+RSpec.describe Pubid::Iec::Identifier::TestReportForm do
   subject { described_class.parse(original || pubid) }
   let(:original) { nil }
 

@@ -1,3 +1,5 @@
+require "forwardable"
+
 module Pubid::Iec
   class Base < Pubid::Core::Identifier::Base
 
@@ -5,14 +7,14 @@ module Pubid::Iec
                   :conjuction_part, :part_version, :trf_publisher,
                   :trf_series, :trf_version, :test_type
 
+    extend Forwardable
+
     # @param stage [String] stage eg. "PWI", "PNW"
     def initialize(publisher: "IEC", stage: nil, vap: nil, database: nil,
                    fragment: nil, version: nil, decision_sheet: nil,
                    conjuction_part: nil, part_version: nil, trf_publisher: nil,
                    trf_series: nil, trf_version: nil, test_type: nil,
                    edition: nil, type: nil, **args)
-      # @stage = stage.to_s if stage
-      # @stage = Stage.parse(stage) if stage
 
       if stage
         if stage.is_a?(Stage)
@@ -34,7 +36,6 @@ module Pubid::Iec
       @trf_version = trf_version.to_s if trf_version
       @test_type = test_type if test_type
       @edition = edition.to_s if edition
-      @type = Identifier.build_type(type) if type
 
       super(**args.merge(publisher: publisher))
     end
@@ -44,6 +45,18 @@ module Pubid::Iec
     end
 
     class << self
+      def transform_hash(params)
+        params.map do |k, v|
+          get_transformer_class.new.apply(k => v.is_a?(Hash) ? transform_hash(v) : v)
+        end.inject({}, :merge)
+      end
+
+      def transform(params)
+        identifier_params = transform_hash(params)
+
+        Identifier.create(**identifier_params)
+      end
+
       def get_amendment_class
         Amendment
       end
