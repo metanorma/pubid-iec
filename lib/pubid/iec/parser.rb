@@ -62,7 +62,8 @@ module Pubid::Iec
         edition.maybe >>
         part.maybe >>
         conjuction_part.maybe >>
-        (space? >> str(":") >> year).maybe >>
+        (space? >> str(":") >> year >> (str("-") >> month_digits.as(:month) >>
+          (str("-") >> day_digits.as(:day)).maybe).maybe).maybe >>
         ((amendment >> corrigendum.maybe) | corrigendum).repeat >>
         fragment.maybe
     end

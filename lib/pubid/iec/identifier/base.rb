@@ -5,7 +5,7 @@ module Pubid::Iec
 
     attr_accessor :vap, :database, :fragment, :version, :decision_sheet,
                   :conjuction_part, :part_version, :trf_publisher,
-                  :trf_series, :trf_version, :test_type
+                  :trf_series, :trf_version, :test_type, :month, :day
 
     extend Forwardable
 
@@ -14,7 +14,9 @@ module Pubid::Iec
                    fragment: nil, version: nil, decision_sheet: nil,
                    conjuction_part: nil, part_version: nil, trf_publisher: nil,
                    trf_series: nil, trf_version: nil, test_type: nil,
-                   edition: nil, type: nil, **args)
+                   edition: nil, type: nil, month: nil, day: nil, **args)
+      # @stage = stage.to_s if stage
+      # @stage = Stage.parse(stage) if stage
 
       if stage
         if stage.is_a?(Stage)
@@ -36,12 +38,18 @@ module Pubid::Iec
       @trf_version = trf_version.to_s if trf_version
       @test_type = test_type if test_type
       @edition = edition.to_s if edition
+      @month = month if month
+      @day = day if day
 
       super(**args.merge(publisher: publisher))
     end
 
     def urn
       Renderer::Urn.new(get_params).render
+    end
+
+    def to_s(with_edition_month_date: false)
+      self.class.get_renderer_class.new(get_params).render(with_edition_month_date: with_edition_month_date)
     end
 
     class << self

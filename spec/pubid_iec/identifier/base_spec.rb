@@ -59,6 +59,12 @@ module Pubid::Iec
       end
     end
 
+    shared_examples "converts pubid to pubid with edition month-date" do
+      it "converts pubid to pubid with edition month-date" do
+        expect(subject.to_s(with_edition_month_date: true)).to eq(pubid)
+      end
+    end
+
     shared_examples "converts pubid to urn" do
       it "converts pubid to urn" do
         expect(subject.urn.to_s).to eq(urn)
@@ -255,6 +261,24 @@ module Pubid::Iec
 
         it { expect(subject).to be_a(Identifier::TechnologyReport) }
       end
+    end
+
+    context "IEC 60794-1-23:2019-10" do
+      let(:original) { "IEC 60794-1-23:2019-10" }
+      let(:pubid) { "IEC 60794-1-23:2019" }
+
+      it_behaves_like "converts pubid to pubid"
+
+      context "with edition month" do
+        let(:pubid) { "IEC 60794-1-23:2019-10" }
+        it_behaves_like "converts pubid to pubid with edition month-date"
+      end
+    end
+
+    context "IEC 60500-113:2022-03-18" do
+      let(:pubid) { "IEC 60500-113:2022-03-18" }
+
+      it_behaves_like "converts pubid to pubid with edition month-date"
     end
 
     context "IEC/ASTM 62885-6:2018" do

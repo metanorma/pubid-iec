@@ -3,7 +3,7 @@ module Pubid::Iec::Renderer
     def render_identifier(params)
       "%{publisher}%{type}%{stage} %{number}%{part}%{conjuction_part}"\
       "%{part_version}%{version}%{iteration}"\
-      "%{year}%{amendments}%{corrigendums}%{fragment}%{vap}%{edition}%{language}%{database}" % params
+      "%{year}%{month}%{day}%{amendments}%{corrigendums}%{fragment}%{vap}%{edition}%{language}%{database}" % params
     end
 
     def render_type(type, _opts, _params)
@@ -62,6 +62,14 @@ module Pubid::Iec::Renderer
       else
         "#{conjunction_symbol}#{conjuction_parts}"
       end
+    end
+
+    def render_month(month, opts, _params)
+      "-#{month}" if opts[:with_edition_month_date]
+    end
+
+    def render_day(day, opts, _params)
+      "-#{day}" if opts[:with_edition_month_date]
     end
   end
 end
