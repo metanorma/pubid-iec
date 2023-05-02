@@ -2,7 +2,8 @@ module Pubid::Iec
   module Identifier
     class Supplement < Base
       def initialize(number:, year: nil)
-        @number, @year = number&.to_i, year&.to_i
+        @number = number ? number.to_i : 1
+        @year = year&.to_i
       end
 
       def <=>(other)
