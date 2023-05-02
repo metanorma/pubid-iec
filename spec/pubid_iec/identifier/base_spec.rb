@@ -175,6 +175,12 @@ module Pubid::Iec
       it_behaves_like "converts pubid to pubid"
     end
 
+    context "IEC 62133-2:2017/AMD1:2021/COR1:2021" do
+      let(:pubid) { "IEC 62133-2:2017/AMD1:2021/COR1:2021" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
     context "IECQ OD 3405:2017" do
       let(:pubid) { "IECQ OD 3405:2017" }
 
