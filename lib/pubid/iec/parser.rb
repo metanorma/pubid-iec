@@ -30,7 +30,7 @@ module Pubid::Iec
 
     rule(:amendment) do
       ((str("/") | str("+") | space).maybe >>
-        str("AMD") >>
+        (str("AMD") | str("A")) >>
         digits.as(:number) >>
         (str(":") >> digits.as(:year)).maybe).as(:amendments)
     end
@@ -40,9 +40,9 @@ module Pubid::Iec
     end
 
     rule(:corrigendum) do
-      ((str("/") | space).maybe >>
+      ((str("/") | str(" + ") | space).maybe >>
         str("COR") >>
-        digits.as(:number) >>
+        digits.as(:number).maybe >>
         (str(":") >> digits.as(:year)).maybe).as(:corrigendums)
     end
 

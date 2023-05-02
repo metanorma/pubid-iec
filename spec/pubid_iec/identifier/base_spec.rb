@@ -193,6 +193,20 @@ module Pubid::Iec
       it_behaves_like "converts pubid to pubid"
     end
 
+    context "IEC 60335-1:2010/A1:2013" do
+      let(:original) { "IEC 60335-1:2010/A1:2013" }
+      let(:pubid) { "IEC 60335-1:2010/AMD1:2013" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
+    context "IEC 60335-1:2010/A1:2013 + COR:2014" do
+      let(:original) { "IEC 60335-1:2010/A1:2013 + COR:2014" }
+      let(:pubid) { "IEC 60335-1:2010/AMD1:2013/COR1:2014" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
     context "IEC/ASTM 62885-6:2018" do
       let(:pubid) { "IEC/ASTM 62885-6:2018" }
 
