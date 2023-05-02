@@ -10,11 +10,11 @@ module Pubid::Iec
 
     class << self
       def get_amendment_class
-        Amendment
+        Identifier::Amendment
       end
 
       def get_corrigendum_class
-        Corrigendum
+        Identifier::Corrigendum
       end
     end
   end

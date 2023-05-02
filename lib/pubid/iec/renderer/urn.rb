@@ -94,5 +94,14 @@ module Pubid::Iec::Renderer
     def render_type(type, _, _)
       ":#{type.downcase}"
     end
+
+    def render_amendments(amendments, _opts, _params)
+      amendments&.map(&:urn)&.join || ""
+    end
+
+    def render_corrigendums(corrigendums, _opts, _params)
+      corrigendums&.map(&:urn)&.join || ""
+    end
+
   end
 end

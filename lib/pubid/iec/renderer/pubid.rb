@@ -30,12 +30,12 @@ module Pubid::Iec::Renderer
       params[:vap] == "CSV" && "+" || "/"
     end
 
-    def render_amendments(amendments, _opts, params)
-      supplement_prefix(params) + super
+    def render_amendments(amendments, _opts, _params)
+      supplement_prefix(params) + amendments.sort.map(&:to_s).join("+")
     end
 
-    def render_corrigendums(corrigendums, _opts, params)
-      supplement_prefix(params) + super
+    def render_corrigendums(corrigendums, _opts, _params)
+      supplement_prefix(params) + corrigendums.sort.map(&:to_s).join("+")
     end
 
     def render_version(version, _opts, params)
