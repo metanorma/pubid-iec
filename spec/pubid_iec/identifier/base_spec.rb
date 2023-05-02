@@ -187,13 +187,19 @@ module Pubid::Iec
       it_behaves_like "converts pubid to pubid"
     end
 
+    context "ISO/IEC 11801:1995+AMD1:1999+AMD2:1999 CSV" do
+      let(:pubid) { "ISO/IEC 11801:1995+AMD1:1999+AMD2:1999 CSV" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
     context "IEC/ASTM 62885-6:2018" do
       let(:pubid) { "IEC/ASTM 62885-6:2018" }
 
       it_behaves_like "converts pubid to pubid"
     end
 
-      context "database identifier" do
+    context "database identifier" do
       context "with DB and with year" do
         let(:original) { "IEC 60061:2022 DB" }
 
