@@ -207,6 +207,38 @@ module Pubid::Iec
       it_behaves_like "converts pubid to pubid"
     end
 
+    context "White Paper" do
+      context "IEC White Paper AI:2018" do
+        let(:pubid) { "IEC White Paper AI:2018" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "IEC White Paper RE-EES:2012" do
+        let(:pubid) { "IEC White Paper RE-EES:2012" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "IEC White Paper Asset Management:2015" do
+        let(:pubid) { "IEC White Paper Asset Management:2015" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "IEC White Paper IoT:WSN:2014" do
+        let(:pubid) { "IEC White Paper IoT:WSN:2014" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "IEC White Paper Safety in the future:2020" do
+        let(:pubid) { "IEC White Paper Safety in the future:2020" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+    end
+
     context "IEC/ASTM 62885-6:2018" do
       let(:pubid) { "IEC/ASTM 62885-6:2018" }
 
