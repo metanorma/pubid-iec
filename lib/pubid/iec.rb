@@ -32,6 +32,7 @@ require_relative "iec/identifier/supplement"
 require_relative "iec/identifier/amendment"
 require_relative "iec/identifier/corrigendum"
 require_relative "iec/identifier/white_paper"
+require_relative "iec/identifier/technology_report"
 require_relative "iec/trf_identifier"
 require_relative "iec/identifier"
 
@@ -49,6 +50,7 @@ config.types = [Pubid::Iec::Identifier::InternationalStandard,
                 Pubid::Iec::Identifier::SystemsReferenceDocument,
                 Pubid::Iec::Identifier::ConformityAssessment,
                 Pubid::Iec::Identifier::TestReportForm,
-                Pubid::Iec::Identifier::WritePaper]
+                Pubid::Iec::Identifier::WritePaper,
+                Pubid::Iec::Identifier::TechnologyReport]
 
 Pubid::Iec::Identifier.set_config(config)
