@@ -239,6 +239,24 @@ module Pubid::Iec
       end
     end
 
+    context "Technology Report" do
+      context "IEC Technology Report LVDC:2017" do
+        let(:pubid) { "IEC Technology Report LVDC:2017" }
+
+        it_behaves_like "converts pubid to pubid"
+
+        it { expect(subject).to be_a(Identifier::TechnologyReport) }
+      end
+
+      context "IEC Technology Report City information modelling:2021" do
+        let(:pubid) { "IEC Technology Report City information modelling:2021" }
+
+        it_behaves_like "converts pubid to pubid"
+
+        it { expect(subject).to be_a(Identifier::TechnologyReport) }
+      end
+    end
+
     context "IEC/ASTM 62885-6:2018" do
       let(:pubid) { "IEC/ASTM 62885-6:2018" }
 
