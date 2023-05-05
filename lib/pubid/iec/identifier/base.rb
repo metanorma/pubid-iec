@@ -45,6 +45,16 @@ module Pubid::Iec
     end
 
     class << self
+      def has_type?(type)
+        return type == self.type[:key] if type.is_a?(Symbol)
+
+        if self.type.key?(:short)
+          self.type[:short].is_a?(Array) ? self.type[:short].include?(type) : self.type[:short] == type
+        else
+          type.to_s.downcase.to_sym == self.type[:key]
+        end
+      end
+
       def transform_hash(params)
         params.map do |k, v|
           get_transformer_class.new.apply(k => v.is_a?(Hash) ? transform_hash(v) : v)

@@ -52,8 +52,8 @@ module Pubid::Iec
 
     rule(:number) do
       (digits | str("SYMBOL") | str("SYCSMARTENERGY") | str("SyCLVDC") |
-        str("SYCLVDC") | str("SyCCOMM") | str("SyCAAL") | str("VIM")) >>
-        match("[A-Z]").maybe
+        str("SYCLVDC") | str("SyCCOMM") | str("SyCAAL") | str("VIM") | match("[A-Za-z ]").repeat) >>
+        ((str(":") >> match("[A-Z]").repeat(1)) | match("[A-Z]")).maybe
     end
 
     rule(:std_document_body) do
