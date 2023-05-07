@@ -293,6 +293,14 @@ module Pubid::Iec
       it_behaves_like "converts pubid to pubid"
     end
 
+    context "IEC Trend Report Digital healthcare:2021" do
+      let(:pubid) { "IEC Trend Report Digital healthcare:2021" }
+
+      it_behaves_like "converts pubid to pubid"
+
+      it { expect(subject).to be_a(Identifier::SocietalTechnologyTrendReport) }
+    end
+
     context "database identifier" do
       context "with DB and with year" do
         let(:original) { "IEC 60061:2022 DB" }
