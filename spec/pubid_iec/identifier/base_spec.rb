@@ -264,6 +264,18 @@ module Pubid::Iec
       it { expect(subject).to be_a(Identifier::SocietalTechnologyTrendReport) }
     end
 
+    context "IEC 60794-1-23:2019-10(en)" do
+      let(:pubid) { "IEC 60794-1-23:2019-10(en)" }
+
+      it_behaves_like "converts pubid to pubid with edition month-date"
+    end
+
+    context "IEC 60794-1-23:2019-10(en-fr)" do
+      let(:pubid) { "IEC 60794-1-23:2019-10(en-fr)" }
+
+      it_behaves_like "converts pubid to pubid with edition month-date"
+    end
+
     context "database identifier" do
       context "with DB and with year" do
         let(:original) { "IEC 60061:2022 DB" }
