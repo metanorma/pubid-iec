@@ -3,7 +3,7 @@ module Pubid::Iec::Renderer
     def render_identifier(params)
       "%{publisher}%{type}%{stage} %{number}%{part}%{conjuction_part}"\
       "%{part_version}%{version}%{iteration}"\
-      "%{year}%{month}%{day}%{amendments}%{corrigendums}%{fragment}%{vap}%{edition}%{language}%{database}" % params
+      "%{year}%{month}%{day}%{amendments}%{corrigendums}%{fragment}%{vap}%{edition}%{database}" % params
     end
 
     def render_type(type, _opts, _params)

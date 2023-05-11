@@ -77,12 +77,19 @@ module Pubid::Iec
       space >> str("DB").as(:database)
     end
 
+    rule(:language) do
+      str("(") >> (
+        (match["a-z"].repeat(1) >> str("-").maybe).repeat.as(:language)
+      ) >> str(")")
+    end
+
     rule(:identifier) do
       (originator.maybe >> (space.maybe >> stage.as(:stage)).maybe >> (space | str("/")) >>
         std_document_body >>
         vap.maybe >> database.maybe >>
         edition.maybe >>
-        (str(":") >> year).maybe)
+        (str(":") >> year).maybe >>
+        language.maybe)
     end
 
     rule(:root) { identifier }
