@@ -71,5 +71,13 @@ module Pubid::Iec::Renderer
     def render_day(day, opts, _params)
       "-#{day}" if opts[:with_edition_month_date]
     end
+
+    def render_language(language, opts, _params)
+      if language.is_a?(Array)
+        "(#{language.map(&:to_s).sort.join('-')})"
+      else
+        "(#{language})"
+      end
+    end
   end
 end

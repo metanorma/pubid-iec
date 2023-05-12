@@ -79,7 +79,7 @@ module Pubid::Iec
 
     rule(:language) do
       str("(") >> (
-        (match["a-z"].repeat(1) >> str("-").maybe).repeat.as(:language)
+        (match["a-z"].repeat(1).as(:language) >> str("-").maybe).repeat(1)
       ) >> str(")")
     end
 

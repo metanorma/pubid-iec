@@ -14,7 +14,8 @@ module Pubid::Iec
                    fragment: nil, version: nil, decision_sheet: nil,
                    conjuction_part: nil, part_version: nil, trf_publisher: nil,
                    trf_series: nil, trf_version: nil, test_type: nil,
-                   edition: nil, type: nil, month: nil, day: nil, **args)
+                   edition: nil, type: nil, month: nil, day: nil,
+                   language: nil, **args)
       # @stage = stage.to_s if stage
       # @stage = Stage.parse(stage) if stage
 
@@ -40,6 +41,7 @@ module Pubid::Iec
       @edition = edition.to_s if edition
       @month = month if month
       @day = day if day
+      @language = language if language
 
       super(**args.merge(publisher: publisher))
     end

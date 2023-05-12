@@ -274,6 +274,8 @@ module Pubid::Iec
       let(:pubid) { "IEC 60794-1-23:2019-10(en-fr)" }
 
       it_behaves_like "converts pubid to pubid with edition month-date"
+
+      it { expect(subject.language.map(&:to_s).sort).to eq(%w[en fr]) }
     end
 
     context "database identifier" do
