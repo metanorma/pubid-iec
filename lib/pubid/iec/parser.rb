@@ -52,7 +52,7 @@ module Pubid::Iec
 
     rule(:number) do
       (digits | str("SYMBOL") | str("SYCSMARTENERGY") | str("SyCLVDC") |
-        str("SYCLVDC") | str("SyCCOMM") | str("SyCAAL") | str("VIM") | match("[A-Za-z ]").repeat) >>
+        str("SYCLVDC") | str("SyCCOMM") | str("SyCAAL") | str("VIM") | match("[A-Za-z0-9 ]").repeat) >>
         ((str(":") >> match("[A-Z]").repeat(1)) | match("[A-Z]")).maybe
     end
 
