@@ -278,6 +278,36 @@ module Pubid::Iec
       it { expect(subject.language.map(&:to_s).sort).to eq(%w[en fr]) }
     end
 
+    context "IEC ACEE 01:2018" do
+      let(:pubid) { "IEC ACEE 01:2018" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
+    context "IEC GIORGI:2001" do
+      let(:pubid) { "IEC GIORGI:2001" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
+    context "IEC CENT-CHAL:2006" do
+      let(:pubid) { "IEC CENT-CHAL:2006" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
+    context "IEC HANDB1:1983" do
+      let(:pubid) { "IEC HANDB1:1983" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
+    context "ISO/IEC 20000-HBK:2019" do
+      let(:pubid) { "ISO/IEC 20000-HBK:2019" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
     context "database identifier" do
       context "with DB and with year" do
         let(:original) { "IEC 60061:2022 DB" }
