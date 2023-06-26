@@ -56,7 +56,7 @@ module Pubid::Iec::Renderer
       "urn:iec:std:%{publisher}%{copublisher}%{type}:%{number}"\
       "%{part}%{conjuction_part}%{year}%{stage}%{vap}"\
       "%{urn_stage}%{corrigendum_stage}%{iteration}%{version}%{part_version}"\
-      "%{edition}%{amendments}%{corrigendums}%{fragment}%{language}" % params
+      "%{edition}%{amendments}%{corrigendums}%{fragment}" % params
     end
 
     def render_number(number, _opts, _params)
@@ -101,6 +101,10 @@ module Pubid::Iec::Renderer
 
     def render_corrigendums(corrigendums, _opts, _params)
       corrigendums&.map(&:urn)&.join || ""
+    end
+
+    def render_language(language, _opts, _params)
+      ":" + (language.is_a?(Array) ? language.join("-") : language)
     end
 
   end
