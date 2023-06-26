@@ -29,6 +29,7 @@ module Pubid::Iec
 
           it "renders language" do
             expect(subject.to_s).to eq("IEC #{number}(en-fr)")
+            expect(subject.urn).to eq("urn:iec:std:iec:#{number}:en-fr")
           end
         end
       end
