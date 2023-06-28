@@ -22,9 +22,18 @@ module Pubid::Iec
       if stage
         if stage.is_a?(Stage)
           @stage = stage
+          @typed_stage = resolve_typed_stage(@stage.harmonized_code) unless @stage.abbr
+        elsif self.class.has_typed_stage?(stage)
+          @typed_stage, @stage = self.class.find_typed_stage(stage)
         else
           @stage = Identifier.parse_stage(stage)
+          # resolve typed stage when harmonized code provided as stage
+          # or stage abbreviation was not resolved
+          if /\A[\d.]+\z/.match?(stage) || @stage.empty_abbr?(with_prf: true)
+            @typed_stage = self.class.resolve_typed_stage(@stage.harmonized_code)
+          end
         end
+        @typed_stage = self.class::TYPED_STAGES[@typed_stage][:abbr] if @typed_stage
       end
 
       @vap = vap.to_s if vap
@@ -99,6 +108,10 @@ module Pubid::Iec
 
       def get_update_codes
         UPDATE_CODES
+      end
+
+      def get_identifier
+        Identifier
       end
     end
 

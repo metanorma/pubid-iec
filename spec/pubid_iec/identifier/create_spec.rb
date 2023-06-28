@@ -33,6 +33,25 @@ module Pubid::Iec
           end
         end
       end
+
+      context "when the same stage applied to different types" do
+        context "TR" do
+          let(:params) { { type: "TR", stage: "40.99" } }
+
+          it "renders stage" do
+            expect(subject.to_s).to eq("IEC ADTR #{number}")
+          end
+        end
+      end
+
+      context "TS" do
+        let(:params) { { type: "TS", stage: "40.99" } }
+
+        it "renders stage" do
+          expect(subject.to_s).to eq("IEC ADTS #{number}")
+        end
+      end
+
     end
   end
 end
