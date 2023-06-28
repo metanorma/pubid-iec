@@ -328,6 +328,14 @@ module Pubid::Iec
       end
     end
 
+    context "typed stage identifiers" do
+      let(:pubid) { "IEC ADTR 123" }
+
+      it { expect(subject.class).to be(Identifier::TechnicalReport) }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
     describe "creating new identifier" do
       subject { described_class.new(**{ number: number }.merge(params)) }
       let(:number) { 123 }
