@@ -15,6 +15,14 @@ module Pubid::Iec
         it "renders document type" do
           expect(subject.to_s).to eq("IEC TR #{number}")
         end
+
+        context "ISH type" do
+          let(:params) { { type: :ish } }
+
+          it "renders ISH document type" do
+            expect(subject.to_s).to eq("IEC ISH #{number}")
+          end
+        end
       end
 
       context "when have language" do
@@ -36,22 +44,29 @@ module Pubid::Iec
 
       context "when the same stage applied to different types" do
         context "TR" do
-          let(:params) { { type: "TR", stage: "40.99" } }
+          let(:params) { { type: "TR", stage: "50.60" } }
 
           it "renders stage" do
-            expect(subject.to_s).to eq("IEC ADTR #{number}")
+            expect(subject.to_s).to eq("IEC PRVDTR #{number}")
           end
         end
       end
 
       context "TS" do
-        let(:params) { { type: "TS", stage: "40.99" } }
+        let(:params) { { type: "TS", stage: "50.60" } }
 
         it "renders stage" do
-          expect(subject.to_s).to eq("IEC ADTS #{number}")
+          expect(subject.to_s).to eq("IEC PRVDTS #{number}")
         end
       end
 
+      context "ISH" do
+        let(:params) { { type: "ISH", stage: "50.60" } }
+
+        it "renders stage" do
+          expect(subject.to_s).to eq("IEC PRVDISH #{number}")
+        end
+      end
     end
   end
 end
