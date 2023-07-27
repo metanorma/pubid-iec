@@ -70,7 +70,7 @@ module Pubid::Iec
 
     context "IEC 62439-1:2010+AMD1:2012+AMD2:2016 CSV" do
       let(:pubid) { "IEC 62439-1:2010+AMD1:2012+AMD2:2016 CSV" }
-      let(:urn) { "urn:iec:std:iec:62439:-1:2010:csv:amd:2016:v2:amd:2012:v1" }
+      let(:urn) { "urn:iec:std:iec:62439:-1:2010:csv:amd:2012:v1:amd:2016:v2" }
 
       it_behaves_like "converts pubid to pubid"
       it_behaves_like "converts pubid to urn"
