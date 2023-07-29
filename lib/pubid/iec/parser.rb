@@ -35,6 +35,12 @@ module Pubid::Iec
         (str(":") >> digits.as(:year)).maybe).as(:amendments)
     end
 
+    rule(:interpretation_sheet) do
+      (str("/") >> str("ISH") >>
+        digits.as(:number) >>
+        (str(":") >> digits.as(:year)).maybe).as(:interpretation_sheet)
+    end
+
     rule(:fragment) do
       (str("/") >> str("FRAG") >> match('[\dA-Z]').repeat(1).as(:fragment)).maybe
     end
@@ -65,7 +71,7 @@ module Pubid::Iec
         (space? >> str(":") >> year >> (str("-") >> month_digits.as(:month) >>
           (str("-") >> day_digits.as(:day)).maybe).maybe).maybe >>
         ((amendment >> corrigendum.maybe) | corrigendum).repeat >>
-        fragment.maybe
+        interpretation_sheet.maybe >> fragment.maybe
     end
 
     rule(:vap) do

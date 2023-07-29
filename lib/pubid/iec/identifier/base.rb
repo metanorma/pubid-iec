@@ -83,6 +83,16 @@ module Pubid::Iec
       def transform(params)
         identifier_params = transform_hash(params)
 
+        if identifier_params[:interpretation_sheet]
+          return Identifier.create(
+            type: :ish,
+            base: Identifier.create(
+              **identifier_params.dup.tap { |h| h.delete(:interpretation_sheet) }),
+            number: identifier_params[:interpretation_sheet][:number],
+            year: identifier_params[:interpretation_sheet][:year]
+          )
+        end
+
         Identifier.create(**identifier_params)
       end
 

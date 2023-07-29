@@ -31,12 +31,17 @@ module Pubid::Iec
         },
       }.freeze
 
+      def initialize(base: nil, **opts)
+        super(**opts)
+        @base = base
+      end
+
       def self.type
         { key: :ish, title: "InterpretationSheet", short: "ISH" }
       end
 
-      def get_params
-        super.merge(type: "ISH")
+      def self.get_renderer_class
+        Renderer::InterpretationSheet
       end
     end
   end
