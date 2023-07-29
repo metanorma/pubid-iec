@@ -308,6 +308,30 @@ module Pubid::Iec
       it_behaves_like "converts pubid to pubid"
     end
 
+    context "IEC 60598-1:1992/ISH1:1996" do
+      let(:pubid) { "IEC 60598-1:1992/ISH1:1996" }
+
+      it_behaves_like "converts pubid to pubid"
+
+      it { expect(subject).to be_a(Identifier::InterpretationSheet) }
+    end
+
+    context "IEC 60335-2-24:2010/AMD2:2017/ISH1:2018" do
+      let(:pubid) { "IEC 60335-2-24:2010/AMD2:2017/ISH1:2018" }
+
+      it_behaves_like "converts pubid to pubid"
+
+      it { expect(subject).to be_a(Identifier::InterpretationSheet) }
+    end
+
+    context "CISPR 15:2013/ISH2:2013" do
+      let(:pubid) { "CISPR 15:2013/ISH2:2013" }
+
+      it_behaves_like "converts pubid to pubid"
+
+      it { expect(subject).to be_a(Identifier::InterpretationSheet) }
+    end
+
     context "database identifier" do
       context "with DB and with year" do
         let(:original) { "IEC 60061:2022 DB" }
