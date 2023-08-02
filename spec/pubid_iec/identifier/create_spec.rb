@@ -17,10 +17,10 @@ module Pubid::Iec
         end
 
         context "ISH type" do
-          let(:params) { { type: :ish } }
+          let(:params) { { type: :ish, base: Identifier.create(number: number)} }
 
           it "renders ISH document type" do
-            expect(subject.to_s).to eq("IEC ISH #{number}")
+            expect(subject.to_s).to eq("IEC #{number}/ISH#{number}")
           end
         end
       end
@@ -61,10 +61,10 @@ module Pubid::Iec
       end
 
       context "ISH" do
-        let(:params) { { type: "ISH", stage: "50.60" } }
+        let(:params) { { type: "ISH", stage: "50.60", base: Identifier.create(number: number) } }
 
         it "renders stage" do
-          expect(subject.to_s).to eq("IEC PRVDISH #{number}")
+          expect(subject.to_s).to eq("IEC #{number}/PRVDISH#{number}")
         end
       end
     end
