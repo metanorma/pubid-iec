@@ -63,8 +63,8 @@ module Pubid::Iec
     end
 
     rule(:std_document_body) do
-      (type >> space).maybe >>
-        number.as(:number) >>
+      ((str("/") | space) >> type).maybe >>
+        space >> number.as(:number) >>
         edition.maybe >>
         part.maybe >>
         conjuction_part.maybe >>
@@ -90,7 +90,7 @@ module Pubid::Iec
     end
 
     rule(:identifier) do
-      (originator.maybe >> (space.maybe >> stage.as(:stage)).maybe >> (space | str("/")) >>
+      (originator.maybe >> (space.maybe >> stage.as(:stage)).maybe >>
         std_document_body >>
         vap.maybe >> database.maybe >>
         edition.maybe >>

@@ -332,6 +332,15 @@ module Pubid::Iec
       it { expect(subject).to be_a(Identifier::InterpretationSheet) }
     end
 
+    context "ISO/FDIS 22301:2012" do
+      let(:pubid) { "ISO/FDIS 22301:2012" }
+
+      # cannot parse ISO identifier with ISO stage
+      it "raises an error" do
+        expect { subject }.to raise_error(Pubid::Core::Errors::ParseError)
+      end
+    end
+
     context "database identifier" do
       context "with DB and with year" do
         let(:original) { "IEC 60061:2022 DB" }
