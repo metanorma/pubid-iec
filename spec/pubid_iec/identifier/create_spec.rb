@@ -22,6 +22,10 @@ module Pubid::Iec
           it "renders ISH document type" do
             expect(subject.to_s).to eq("IEC #{number}/ISH#{number}")
           end
+
+          it "returns typed stage" do
+            expect(subject.typed_stage_abbrev).to eq("ISH")
+          end
         end
       end
 
@@ -65,6 +69,10 @@ module Pubid::Iec
 
         it "renders stage" do
           expect(subject.to_s).to eq("IEC #{number}/PRVDISH#{number}")
+        end
+
+        it "returns typed stage" do
+          expect(subject.typed_stage_abbrev).to eq("PRVDISH")
         end
       end
     end

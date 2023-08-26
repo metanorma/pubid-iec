@@ -15,9 +15,9 @@ module Pubid::Iec
 
       attr_accessor :technical_committee
 
-      def initialize(publisher: "IEC", technical_committee: nil, **args)
+      def initialize(publisher: "IEC", technical_committee: nil, stage: nil, **args)
         super(**args.merge(publisher: publisher))
-
+        @stage = stage
         @technical_committee = technical_committee
       end
 

@@ -10,31 +10,12 @@ module Pubid::Iec
     extend Forwardable
 
     # @param stage [String] stage eg. "PWI", "PNW"
-    def initialize(publisher: "IEC", stage: nil, vap: nil, database: nil,
+    def initialize(publisher: "IEC", vap: nil, database: nil,
                    fragment: nil, version: nil, decision_sheet: nil,
                    conjuction_part: nil, part_version: nil, trf_publisher: nil,
                    trf_series: nil, trf_version: nil, test_type: nil,
                    edition: nil, type: nil, month: nil, day: nil,
                    language: nil, **args)
-      # @stage = stage.to_s if stage
-      # @stage = Stage.parse(stage) if stage
-
-      if stage
-        if stage.is_a?(Stage)
-          @stage = stage
-          @typed_stage = resolve_typed_stage(@stage.harmonized_code) unless @stage.abbr
-        elsif self.class.has_typed_stage?(stage)
-          @typed_stage, @stage = self.class.find_typed_stage(stage)
-        else
-          @stage = Identifier.parse_stage(stage)
-          # resolve typed stage when harmonized code provided as stage
-          # or stage abbreviation was not resolved
-          if /\A[\d.]+\z/.match?(stage) || @stage.empty_abbr?(with_prf: true)
-            @typed_stage = self.class.resolve_typed_stage(@stage.harmonized_code)
-          end
-        end
-        @typed_stage = self.class::TYPED_STAGES[@typed_stage][:abbr] if @typed_stage
-      end
 
       @vap = vap.to_s if vap
       @database = database if database
