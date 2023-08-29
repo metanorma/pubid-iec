@@ -16,6 +16,14 @@ module Pubid::Iec
           expect(subject.to_s).to eq("IEC TR #{number}")
         end
 
+        it "returns typed stage" do
+          expect(subject.typed_stage_abbrev).to eq("TR")
+        end
+
+        it "returns typed stage name" do
+          expect(subject.typed_stage_name).to eq("Technical Report")
+        end
+
         context "ISH type" do
           let(:params) { { type: :ish, base: Identifier.create(number: number)} }
 
@@ -25,6 +33,10 @@ module Pubid::Iec
 
           it "returns typed stage" do
             expect(subject.typed_stage_abbrev).to eq("ISH")
+          end
+
+          it "returns typed stage name" do
+            expect(subject.typed_stage_name).to eq("Interpretation Sheet")
           end
         end
       end
@@ -73,6 +85,22 @@ module Pubid::Iec
 
         it "returns typed stage" do
           expect(subject.typed_stage_abbrev).to eq("PRVDISH")
+        end
+      end
+
+      context "CD" do
+        let(:params) { { stage: "CD" } }
+
+        it "renders stage" do
+          expect(subject.to_s).to eq("IEC CD #{number}")
+        end
+
+        it "returns typed stage" do
+          expect(subject.typed_stage_abbrev).to eq("CD IS")
+        end
+
+        it "returns typed stage name" do
+          expect(subject.typed_stage_name).to eq("Draft circulated as CD International Standard")
         end
       end
     end

@@ -367,6 +367,14 @@ module Pubid::Iec
       it { expect(subject.class).to be(Identifier::TechnicalReport) }
 
       it_behaves_like "converts pubid to pubid"
+
+      it "returns typed stage" do
+        expect(subject.typed_stage_abbrev).to eq("ADTR")
+      end
+
+      it "returns typed stage name" do
+        expect(subject.typed_stage_name).to eq("Approved for DTR")
+      end
     end
 
     describe "creating new identifier" do

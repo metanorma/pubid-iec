@@ -37,7 +37,7 @@ module Pubid::Iec
       end
 
       def self.type
-        { key: :ish, title: "InterpretationSheet", short: "ISH" }
+        { key: :ish, title: "Interpretation Sheet", short: "ISH" }
       end
 
       def self.get_renderer_class
