@@ -21,6 +21,56 @@ abbreviations:
   TPUB: "60.00"
   WPUB: "95.99"
 
+names:
+  ACD: Approved for CD
+  ACDV: Approved for CDV
+  ADTR: Approved for DTR
+  ADTS: Approved for DTS
+  AFDIS: Approved for FDIS
+  APUB: Approved for publication
+  BPUB: Being published
+  CAN: Draft cancelled
+  CD: Draft circulated as CD
+  CDM: CD to be discussed at meeting
+  CCDV: Draft circulated as CDV
+  CDISH: Draft circulated as DISH
+  CDVM: Rejected CDV to be discussed at a meeting
+  CFDIS: Draft circulated as FDIS
+  CDPAS: Draft circulated as DPAS
+  CDTR: Draft circulated as DTR
+  CDTS: Draft circulated as DTS
+  DTRM: Rejected DTR to be discussed at meeting
+  DTSM: Rejected DTS to be discussed at meeting
+  DECDISH: DISH at editing check
+  DECFDIS: FDIS at editing check
+  DECPUB: Publication at editing check
+  DEL: Deleted/abandoned
+  DELPUB: Deleted publication
+  NCDV: CDV rejected
+  NDTR: DTR rejected
+  NDTS: DTS rejected
+  NFDIS: FDIS rejected
+  PCC: Preparation of CC
+  PNW: New work item proposal
+  PPUB: Publication issued
+  PRVC: Preparation of RVC
+  PRVDISH: Preparation of RVDISH
+  PRVD: Preparation of RVD
+  PRVDPAS: Preparation of RVDPAS
+  PRVDTR: Preparation of RVDTR
+  PRVDTS: Preparation of RVDTS
+  PRVN: Preparation of RVN
+  PWI: Preliminary work item
+  RDISH: DISH received and registered
+  RFDIS: FDIS received and registered
+  RPUB: Publication received and registered
+  TCDV: Translation of CDV
+  TDISH: Translation of DISH
+  TDTR: Translation of DTR
+  TDTS: Translation of DTS
+  TPUB: Translation of publication
+  WPUB: Publication withdrawn
+
 codes_description:
   "00.00": Proposal for new project received
   "00.20": Proposal for new project under review
