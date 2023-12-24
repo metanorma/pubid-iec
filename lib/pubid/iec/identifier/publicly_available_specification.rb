@@ -9,6 +9,14 @@ module Pubid::Iec
           name: "Draft circulated as DPAS",
           harmonized_stages: %w[50.20],
         },
+        dpas: {
+          abbr: "DPAS",
+          name: "Draft Publicly Available Specification",
+          harmonized_stages: %w[50.00 50.20 50.60 50.92 50.98 50.99],
+        }
+      }.freeze
+
+      PROJECT_STAGES = {
         PRVDPAS: {
           abbr: "PRVDPAS",
           name: "Preparation of RVDPAS",
@@ -20,7 +28,7 @@ module Pubid::Iec
         { key: :pas, title: "Publicly Available Specification", short: "PAS" }
       end
 
-      def get_params
+      def to_h(deep: false)
         super.merge(type: "PAS")
       end
     end

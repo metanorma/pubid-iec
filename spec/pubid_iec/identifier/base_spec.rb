@@ -110,7 +110,7 @@ module Pubid::Iec
     context "PWI 100-44 ED1" do
       let(:original) { "PWI 100-44 ED1" }
       let(:pubid) { "IEC PWI 100-44 ED1"}
-      let(:urn) { "urn:iec:std:iec:100:-44:stage-00.00:ed-1" }
+      let(:urn) { "urn:iec:std:iec:100:-44:stage-draft:ed-1" }
 
       it_behaves_like "converts pubid to pubid"
       it_behaves_like "converts pubid to urn"
@@ -119,7 +119,7 @@ module Pubid::Iec
     context "PWI SRD SyCCOMM-1 ED1" do
       let(:original) { "PWI SRD SyCCOMM-1 ED1" }
       let(:pubid) { "IEC SRD PWI SyCCOMM-1 ED1" }
-      let(:urn) { "urn:iec:std:iec:srd:syccomm:-1:stage-00.00:ed-1" }
+      let(:urn) { "urn:iec:std:iec:srd:syccomm:-1:stage-draft:ed-1" }
 
       it_behaves_like "converts pubid to pubid"
       it_behaves_like "converts pubid to urn"
@@ -341,6 +341,13 @@ module Pubid::Iec
       end
     end
 
+    context "PNW 65-915 ED1" do
+      let(:original) { "PNW 65-915 ED1" }
+      let(:pubid) { "IEC PNW 65-915 ED1" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
     context "database identifier" do
       context "with DB and with year" do
         let(:original) { "IEC 60061:2022 DB" }
@@ -362,18 +369,18 @@ module Pubid::Iec
     end
 
     context "typed stage identifiers" do
-      let(:pubid) { "IEC ADTR 123" }
+      let(:pubid) { "IEC DTR 123" }
 
       it { expect(subject.class).to be(Identifier::TechnicalReport) }
 
       it_behaves_like "converts pubid to pubid"
 
       it "returns typed stage" do
-        expect(subject.typed_stage_abbrev).to eq("ADTR")
+        expect(subject.typed_stage_abbrev).to eq("DTR")
       end
 
       it "returns typed stage name" do
-        expect(subject.typed_stage_name).to eq("Approved for DTR")
+        expect(subject.typed_stage_name).to eq("Draft Technical Report")
       end
     end
 
@@ -389,7 +396,7 @@ module Pubid::Iec
         end
 
         it "renders correct URN" do
-          expect(subject.urn).to eq("urn:iec:std:iec:123:stage-30.20")
+          expect(subject.urn).to eq("urn:iec:std:iec:123:stage-draft")
         end
       end
     end

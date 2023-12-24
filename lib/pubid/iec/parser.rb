@@ -8,7 +8,7 @@ module Pubid::Iec
     end
 
     rule(:stage) do
-      array_to_str(Renderer::Urn::STAGES.keys)
+      array_to_str(Identifier.config.typed_stages.map { |_, v| v[:abbr] } + Identifier.config.stages["abbreviations"].keys)
     end
 
     rule(:type) do

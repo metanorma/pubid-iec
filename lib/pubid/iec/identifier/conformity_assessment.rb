@@ -7,7 +7,7 @@ module Pubid::Iec
         { key: :ca, title: "Conformity Assessment", short: "CA" }
       end
 
-      def get_params
+      def to_h(deep: false)
         super.merge(type: "CA")
       end
     end

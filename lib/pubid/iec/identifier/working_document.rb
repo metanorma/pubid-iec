@@ -22,7 +22,11 @@ module Pubid::Iec
       end
 
       def urn
-        Renderer::WorkingDocumentUrn.new(get_params).render
+        Renderer::WorkingDocumentUrn.new(renderer_data).render
+      end
+
+      def renderer_data
+        to_h(deep: false)
       end
 
       class << self

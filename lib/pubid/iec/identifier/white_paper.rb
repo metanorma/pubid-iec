@@ -7,7 +7,7 @@ module Pubid::Iec
         { key: :wp, title: "Write Paper", short: "White Paper" }
       end
 
-      def get_params
+      def to_h(deep: false)
         super.merge(type: "White Paper")
       end
     end

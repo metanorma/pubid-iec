@@ -7,7 +7,7 @@ module Pubid::Iec
         { key: :cs, title: "Component Specification", short: "CS" }
       end
 
-      def get_params
+      def to_h(deep: false)
         super.merge(type: "CS")
       end
     end

@@ -23,7 +23,7 @@ module Pubid::Iec
       end
 
       def urn
-        Renderer::TrfUrn.new(get_params).render
+        Renderer::TrfUrn.new(renderer_data).render
       end
 
       class << self
