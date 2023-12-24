@@ -8,7 +8,7 @@ module Pubid::Iec
         { key: :sttr, title: "Societal and Technology Trend Report", short: "Trend Report" }
       end
 
-      def get_params
+      def to_h(deep: false)
         super.merge(type: "Trend Report")
       end
     end

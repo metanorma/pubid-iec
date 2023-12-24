@@ -7,8 +7,16 @@ module Pubid::Iec
         cdish: {
           abbr: "CDISH",
           name: "Draft circulated as DISH",
-          harmonized_stages: %w[50.20],
+          harmonized_stages: %w[30.00 30.20 30.60 30.92 30.98 30.99],
         },
+        dish: {
+          abbr: "DISH",
+          name: "Draft Interpretation Sheet",
+          harmonized_stages: %w[50.00 50.20 50.60 50.92 50.98 50.99],
+        }
+      }.freeze
+
+      PROJECT_STAGES = {
         decdish: {
           abbr: "DECDISH",
           name: "DISH at editing check",

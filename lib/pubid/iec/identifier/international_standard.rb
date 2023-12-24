@@ -4,6 +4,10 @@ module Pubid::Iec
       def_delegators 'Pubid::Iec::Identifier::InternationalStandard', :type
 
       TYPED_STAGES = {
+
+      }.freeze
+
+      PROJECT_STAGES = {
         afdis: {
           abbr: "AFDIS",
           name: "Approved for FDIS",

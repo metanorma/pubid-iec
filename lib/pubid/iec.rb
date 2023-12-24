@@ -10,6 +10,7 @@ end
 require "pubid-core"
 require_relative "iec/errors"
 require_relative "iec/stage"
+require_relative "iec/typed_project_stage"
 require_relative "iec/parser"
 require_relative "iec/trf_parser"
 require_relative "iec/renderer/pubid"
@@ -43,8 +44,9 @@ require_relative "iec/identifier/working_document"
 require_relative "iec/trf_identifier"
 require_relative "iec/identifier"
 require_relative "iec/working_document"
+require_relative "iec/configuration"
 
-config = Pubid::Core::Configuration.new
+config = Pubid::Iec::Configuration.new
 config.stages = YAML.load_file(File.join(File.dirname(__FILE__), "../../stages.yaml"))
 config.stage_class = Pubid::Iec::Stage
 config.default_type = Pubid::Iec::Identifier::InternationalStandard

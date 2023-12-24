@@ -1,25 +1,10 @@
 abbreviations:
-  ACD: "20.99"
-  ACDV: "30.99"
-  APUB: "50.99"
-  BPUB: "60.00"
-  CAN: "30.98"
-  CD: "30.20"
-  CDM: "30.60"
-  DECPUB: "60.00"
-  DEL: "10.98"
-  DELPUB: "99.60"
-  MERGED: "30.97"
-  PCC: "30.60"
-  PNW: "10.20"
-  PPUB: "60.60"
-  PRVN: "10.60"
-  PWI: "00.00"
-  RPUB: "60.00"
-  SPLIT: "30.96"
-  TCDV: "40.00"
-  TPUB: "60.00"
-  WPUB: "95.99"
+  PWI: ["00.00", "00.20", "00.60", "00.98", "00.99"]
+  PNW: ["10.20"]
+  ANW: ["10.99", "20.00"]
+  WD: [ "20.20", "20.60", "20.98", "20.99" ]
+  CD: ["30.00", "30.20", "30.60", "30.92", "30.98", "30.99"]
+  CDV: [ "40.00", "40.20", "40.60", "40.92", "40.98", "40.99" ]
 
 names:
   ACD: Approved for CD
@@ -70,6 +55,9 @@ names:
   TDTS: Translation of DTS
   TPUB: Translation of publication
   WPUB: Publication withdrawn
+  WD: Working Draft
+  NP: New Proposal
+
 
 codes_description:
   "00.00": Proposal for new project received
@@ -118,3 +106,11 @@ codes_description:
   "95.60": Close of voting
   "95.92": Decision not to withdraw International Standard
   "95.99": Withdrawal of International Standard
+
+draft_codes: ["00.00", "00.20", "00.60", "00.99", "10.00", "10.20", "10.60", "10.92",
+              "10.99", "20.00", "20.20", "20.60", "20.99", "30.00",
+              "30.20", "30.60", "30.92", "30.99", "40.00", "40.20", "40.60", "40.92",
+              "40.93", "40.99", "50.00", "50.20", "50.60", "50.92", "50.99"]
+
+canceled_codes: ["00.98", "10.98", "20.98", "30.98", "40.98", "50.98", "95.99"]
+published_codes: ["60.00", "60.60", "90.20", "90.60", "90.92", "90.93", "90.99", "95.20", "95.60", "95.92"]

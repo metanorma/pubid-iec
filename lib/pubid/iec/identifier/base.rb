@@ -9,13 +9,15 @@ module Pubid::Iec
 
     extend Forwardable
 
+    PROJECT_STAGES = {}.freeze
+
     # @param stage [String] stage eg. "PWI", "PNW"
     def initialize(publisher: "IEC", vap: nil, database: nil,
                    fragment: nil, version: nil, decision_sheet: nil,
                    conjuction_part: nil, part_version: nil, trf_publisher: nil,
                    trf_series: nil, trf_version: nil, test_type: nil,
                    edition: nil, type: nil, month: nil, day: nil,
-                   language: nil, **args)
+                   language: nil, stage: nil, **args)
 
       @vap = vap.to_s if vap
       @database = database if database
@@ -33,18 +35,47 @@ module Pubid::Iec
       @day = day if day
       @language = language if language
 
+      if stage
+        @stage = self.class.has_project_stage?(stage) ? self.class.resolve_project_stage(stage) : resolve_stage(stage)
+      end
+
       super(**args.merge(publisher: publisher))
     end
 
     def urn
-      Renderer::Urn.new(get_params).render
+      Renderer::Urn.new(renderer_data).render
+    end
+
+    def lookup_typed_stage(lookup_code)
+      self.class::TYPED_STAGES.each do |abbr, stage|
+        if stage[:harmonized_stages] & lookup_code == lookup_code
+          return Identifier.build_typed_stage(abbr: abbr, harmonized_code: lookup_code)
+        end
+      end
+
+      nil
+    end
+
+    def renderer_data
+      values = to_h(deep: false)
+
+      # convert project stage to typed stage
+      if values.key?(:stage) && values[:stage].is_a?(TypedProjectStage)
+        values[:stage] = lookup_typed_stage(values[:stage].harmonized_code.stages) ||
+          resolve_stage(values[:stage].harmonized_code.stages.first)
+      end
+      values
     end
 
     def to_s(with_edition_month_date: false)
-      self.class.get_renderer_class.new(get_params).render(with_edition_month_date: with_edition_month_date)
+      self.class.get_renderer_class.new(renderer_data).render(with_edition_month_date: with_edition_month_date)
     end
 
     class << self
+      def has_project_stage?(project_stage)
+        self::PROJECT_STAGES.any? { |k, v| v[:abbr] == project_stage }
+      end
+
       def has_type?(type)
         return type == self.type[:key] if type.is_a?(Symbol)
 
@@ -53,6 +84,14 @@ module Pubid::Iec
         else
           type.to_s.downcase.to_sym == self.type[:key]
         end
+      end
+
+      def resolve_project_stage(project_stage)
+        stage = self::PROJECT_STAGES.find do |k, v|
+          v[:abbr] == project_stage
+        end
+
+        Identifier.build_project_stage(abbr: stage[1][:abbr], harmonized_code: stage[1][:harmonized_stages])
       end
 
       def transform_hash(params)

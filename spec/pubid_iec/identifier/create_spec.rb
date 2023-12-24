@@ -60,31 +60,74 @@ module Pubid::Iec
 
       context "when the same stage applied to different types" do
         context "TR" do
-          let(:params) { { type: "TR", stage: "50.60" } }
+          let(:params) { { type: "TR", stage: stage } }
+          let(:stage) { "50.60" }
 
           it "renders stage" do
-            expect(subject.to_s).to eq("IEC PRVDTR #{number}")
+            expect(subject.to_s).to eq("IEC DTR #{number}")
           end
         end
       end
 
       context "TS" do
-        let(:params) { { type: "TS", stage: "50.60" } }
+        let(:params) { { type: "TS", stage: stage } }
+        let(:stage) { "50.60" }
 
         it "renders stage" do
-          expect(subject.to_s).to eq("IEC PRVDTS #{number}")
+          expect(subject.to_s).to eq("IEC DTS #{number}")
+        end
+
+        context "when project stage" do
+          let(:stage) { "PRVDTS" }
+
+          it "renders closest stage" do
+            expect(subject.to_s).to eq("IEC DTS #{number}")
+          end
+        end
+
+        context "when project stage" do
+          let(:stage) { "ADTS" }
+
+          it "renders closest stage" do
+            expect(subject.to_s).to eq("IEC TS CDV #{number}")
+          end
+        end
+
+        context "when normal stage" do
+          let(:stage) { "CD" }
+
+          it "renders stage" do
+            expect(subject.to_s).to eq("IEC TS CD #{number}")
+          end
+
+          context "NP stage" do
+            let(:stage) { "PNW" }
+
+            it "renders stage" do
+              expect(subject.to_s).to eq("IEC TS PNW #{number}")
+            end
+          end
+
+          context "PWI stage" do
+            let(:stage) { "PWI" }
+
+            it "renders stage" do
+              expect(subject.to_s).to eq("IEC TS PWI #{number}")
+            end
+          end
         end
       end
 
       context "ISH" do
-        let(:params) { { type: "ISH", stage: "50.60", base: Identifier.create(number: number) } }
+        let(:params) { { type: "ISH", stage: stage, base: Identifier.create(number: number) } }
+        let(:stage) { "50.60" }
 
         it "renders stage" do
-          expect(subject.to_s).to eq("IEC #{number}/PRVDISH#{number}")
+          expect(subject.to_s).to eq("IEC #{number}/DISH#{number}")
         end
 
         it "returns typed stage" do
-          expect(subject.typed_stage_abbrev).to eq("PRVDISH")
+          expect(subject.typed_stage_abbrev).to eq("DISH")
         end
       end
 

@@ -9,8 +9,8 @@ module Pubid::Iec::Renderer
       " #{typed_stage}"
     end
 
-    def render_type(type, _opts, _params)
-      return if params[:typed_stage]
+    def render_type(type, _opts, params)
+      return if params[:stage].is_a?(::Pubid::Core::TypedStage)
 
       " #{type}"
     end

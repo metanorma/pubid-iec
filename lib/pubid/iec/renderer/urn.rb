@@ -88,7 +88,7 @@ module Pubid::Iec::Renderer
     end
 
     def render_stage(stage, _opts, params)
-      ":stage-#{sprintf('%05.2f', stage.to_s(:urn))}"
+      ":stage-#{sprintf('%s', stage.to_s(:urn))}"
     end
 
     def render_type(type, _, _)
