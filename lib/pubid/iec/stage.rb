@@ -20,7 +20,7 @@ module Pubid::Iec
           # update abbreviation with identifier's stage
           @abbr = lookup_abbr(@harmonized_code.stages)
         else
-          raise Errors::StageInvalidError, "#{abbr} is not valid stage" unless config.stages["abbreviations"].key?(abbr.to_s)
+          raise Pubid::Core::Errors::StageInvalidError, "#{abbr} is not valid stage" unless config.stages["abbreviations"].key?(abbr.to_s)
 
           @harmonized_code ||= Pubid::Core::HarmonizedStageCode.new(lookup_code(abbr), config: config)
         end
