@@ -86,11 +86,30 @@ module Pubid::Iec
         end
 
         context "when project stage" do
-          let(:stage) { "ADTS" }
+          context "typed project stage" do
+            let(:stage) { "ADTS" }
 
-          it "renders closest stage" do
-            expect(subject.to_s).to eq("IEC TS CDV #{number}")
+            it "renders closest stage" do
+              expect(subject.to_s).to eq("IEC TS CDV #{number}")
+            end
           end
+
+          context "untyped project stage" do
+            let(:stage) { "ACD" }
+
+            it "renders closest stage" do
+              expect(subject.to_s).to eq("IEC TS WD #{number}")
+            end
+
+            context "when indentifier's stage is not available" do
+              let(:stage) { "DECPUB" }
+
+              it "renders without stage" do
+                expect(subject.to_s).to eq("IEC TS #{number}")
+              end
+            end
+          end
+
         end
 
         context "when normal stage" do

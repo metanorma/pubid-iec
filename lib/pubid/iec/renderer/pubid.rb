@@ -20,7 +20,7 @@ module Pubid::Iec::Renderer
     end
 
     def render_stage(stage, _opts, params)
-      return if params[:typed_stage]
+      return if params[:typed_stage] || stage.abbr.nil?
 
       " #{stage}"
     end
