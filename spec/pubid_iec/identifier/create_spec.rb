@@ -106,6 +106,7 @@ module Pubid::Iec
 
               it "renders without stage" do
                 expect(subject.to_s).to eq("IEC TS #{number}")
+                expect(subject.urn).to eq("urn:iec:std:iec:ts:#{number}:stage-60.00")
               end
             end
           end
