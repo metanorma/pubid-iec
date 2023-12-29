@@ -166,6 +166,14 @@ module Pubid::Iec
           expect(subject.typed_stage_name).to eq("Draft circulated as CD International Standard")
         end
       end
+
+      context "CDV" do
+        let(:params) { { stage: "CDV" } }
+
+        it "returns typed stage name" do
+          expect(subject.typed_stage_name).to eq("Committee Draft for Vote International Standard")
+        end
+      end
     end
   end
 end
