@@ -28,11 +28,9 @@ module Pubid::Iec
     end
 
     def to_s(format = :short)
-      return "" if empty_abbr?
-
       case format
       when :short
-        abbr
+        empty_abbr? ? "" : abbr
       else
         @harmonized_code.to_s
       end
