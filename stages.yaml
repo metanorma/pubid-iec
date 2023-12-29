@@ -69,7 +69,8 @@ names:
   WPUB: Publication withdrawn
   WD: Working Draft
   NP: New Proposal
-
+  CDV: Committee Draft for Vote
+  ANW: Registration of new project
 
 codes_description:
   "00.00": Proposal for new project received
