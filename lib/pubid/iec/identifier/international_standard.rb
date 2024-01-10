@@ -66,7 +66,7 @@ module Pubid::Iec
       }.freeze
 
       def self.type
-        { key: :is, title: "International Standard", short: "IS" }
+        { key: :is, title: "International Standard", short: nil }
       end
     end
   end
