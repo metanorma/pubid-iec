@@ -384,6 +384,20 @@ module Pubid::Iec
       end
     end
 
+    context "identifiers with letter after number" do
+      context "IEC 60067d:1960" do
+        let(:pubid) { "IEC 60067d:1960" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "IEC 60068-2-10a:1969" do
+        let(:pubid) { "IEC 60068-2-10a:1969" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+    end
+
     describe "creating new identifier" do
       subject { described_class.new(**{ number: number }.merge(params)) }
       let(:number) { 123 }

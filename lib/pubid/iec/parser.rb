@@ -17,7 +17,7 @@ module Pubid::Iec
 
     rule(:part) do
       (str("-") | str("/")) >> space? >>
-        (str("Amd") | str("Cor")).absent? >> (match['[\dA-Z]'] | str("-")).repeat(1).as(:part)
+        (str("Amd") | str("Cor")).absent? >> (match['[\dA-Za-z]'] | str("-")).repeat(1).as(:part)
     end
 
     rule(:version) { digits >> (dot >> digits).maybe }
@@ -59,7 +59,7 @@ module Pubid::Iec
     rule(:number) do
       (digits | str("SYMBOL") | str("SYCSMARTENERGY") | str("SyCLVDC") |
         str("SYCLVDC") | str("SyCCOMM") | str("SyCAAL") | str("VIM") | match("[A-Za-z0-9 ]").repeat) >>
-        ((str(":") >> match("[A-Z]").repeat(1)) | match("[A-Z]")).maybe
+        ((str(":") >> match("[A-Z]").repeat(1)) | match("[a-zA-Z]")).maybe
     end
 
     rule(:std_document_body) do
