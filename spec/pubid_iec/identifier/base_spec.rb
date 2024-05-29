@@ -76,6 +76,15 @@ module Pubid::Iec
       it_behaves_like "converts pubid to urn"
     end
 
+    context "IEC 60529:1989+AMD1:1999 CSV/COR2:2007" do
+      let(:original) { "IEC 60529:1989+AMD1:1999 CSV/COR2:2007"}
+      let(:pubid) { "IEC 60529:1989+AMD1:1999+COR2:2007 CSV"}
+      let(:urn) { "urn:iec:std:iec:60529:1989:csv:amd:1999:v1:cor:2007:v2" }
+
+      it_behaves_like "converts pubid to pubid"
+      it_behaves_like "converts pubid to urn"
+    end
+
     context "IEC 60050-102:2007/AMD1:2017 ED1" do
       let(:pubid) { "IEC 60050-102:2007/AMD1:2017 ED1" }
       let(:urn) { "urn:iec:std:iec:60050:-102:2007:ed-1:amd:2017:v1" }

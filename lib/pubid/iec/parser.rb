@@ -70,7 +70,7 @@ module Pubid::Iec
         conjuction_part.maybe >>
         (space? >> str(":") >> year >> (str("-") >> month_digits.as(:month) >>
           (str("-") >> day_digits.as(:day)).maybe).maybe).maybe >>
-        ((amendment >> corrigendum.maybe) | corrigendum).repeat >>
+        ((amendment >> vap.maybe >> corrigendum.maybe) | corrigendum).repeat >>
         interpretation_sheet.maybe >> fragment.maybe
     end
 
