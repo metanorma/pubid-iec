@@ -32,6 +32,11 @@ module Pubid::Iec
 
         it_behaves_like "parse identifiers from file"
       end
+      context "parses identifiers with sheets from sheets-pubid.txt" do
+        let(:examples_file) { "sheets-pubid.txt" }
+
+        it_behaves_like "parse identifiers from file"
+      end
     end
 
     context "IEC 60050-351:2013/AMD1:2016" do
@@ -402,6 +407,20 @@ module Pubid::Iec
 
       context "IEC 60068-2-10a:1969" do
         let(:pubid) { "IEC 60068-2-10a:1969" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+    end
+
+    context "identifiers with sheet number" do
+      context "IEC 60695-2-1/1:1994" do
+        let(:pubid) { "IEC 60695-2-1/1:1994" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "IEC 60695-2-1/1:1994/COR1:1995" do
+        let(:pubid) { "IEC 60695-2-1/1:1994/COR1:1995" }
 
         it_behaves_like "converts pubid to pubid"
       end

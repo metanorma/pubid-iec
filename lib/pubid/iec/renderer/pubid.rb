@@ -3,7 +3,7 @@ module Pubid::Iec::Renderer
     def render_identifier(params)
       "%{publisher}%{type}%{typed_stage}%{stage} %{number}%{part}%{conjuction_part}"\
       "%{part_version}%{version}%{iteration}"\
-      "%{year}%{month}%{day}%{amendments}%{corrigendums}%{fragment}%{vap}%{edition}%{database}" % params
+      "%{year}%{month}%{day}%{sheet}%{amendments}%{corrigendums}%{fragment}%{vap}%{edition}%{database}" % params
     end
     def render_typed_stage(typed_stage, _opts, _params)
       " #{typed_stage}"
@@ -27,6 +27,10 @@ module Pubid::Iec::Renderer
 
     def render_fragment(fragment, _opts, _params)
       "/FRAG#{fragment}"
+    end
+
+    def render_sheet(sheet, _opts, _params)
+      "/#{sheet[:number]}" + (sheet[:year] ? ":#{sheet[:year]}" : "")
     end
 
     def render_database(database, _opts, _params)

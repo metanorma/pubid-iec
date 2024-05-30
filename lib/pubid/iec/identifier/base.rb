@@ -5,7 +5,7 @@ module Pubid::Iec
 
     attr_accessor :vap, :database, :fragment, :version, :decision_sheet,
                   :conjuction_part, :part_version, :trf_publisher,
-                  :trf_series, :trf_version, :test_type, :month, :day
+                  :trf_series, :trf_version, :test_type, :month, :day, :sheet
 
     extend Forwardable
 
@@ -17,7 +17,7 @@ module Pubid::Iec
                    conjuction_part: nil, part_version: nil, trf_publisher: nil,
                    trf_series: nil, trf_version: nil, test_type: nil,
                    edition: nil, type: nil, month: nil, day: nil,
-                   language: nil, stage: nil, **args)
+                   language: nil, stage: nil, sheet: nil, **args)
 
       @vap = vap.to_s if vap
       @database = database if database
@@ -34,6 +34,7 @@ module Pubid::Iec
       @month = month if month
       @day = day if day
       @language = language if language
+      @sheet = sheet if sheet
 
       if stage
         @stage = self.class.has_project_stage?(stage) ? self.class.resolve_project_stage(stage) : resolve_stage(stage)
